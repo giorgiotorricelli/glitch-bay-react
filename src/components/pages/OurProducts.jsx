@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import ProductList from "../components/ProductList.jsx";
+import ProductList from "../ProductList";
 
-function Home() {
+function OurProducts() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -14,13 +14,11 @@ function Home() {
         console.log("DATA API:", data);
         setProducts(data.results);
     };
-
     return (
-        <>
-            <h1>Prodotti</h1>
-
+        <main className="products-main">
             <ProductList products={products} />
-        </>
-    )
+        </main>
+    );
 }
-export default Home;
+
+export default OurProducts;
