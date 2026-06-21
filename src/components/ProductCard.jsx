@@ -17,8 +17,12 @@ function ProductCard({ product, displayed }) {
                     {displayed === 'product-detail' ? <div className="mt-auto">
                         <p className="card-text">{product.description}</p>
                     </div> : null}
-                    
+
+                    {displayed !== 'product-detail' ? 
                     <Link to={`/products/${product.slug}`} className="btn btn-primary mt-3">Esplora</Link>
+                     : null}
+                    
+                    
 
                 </div>
             </div>
