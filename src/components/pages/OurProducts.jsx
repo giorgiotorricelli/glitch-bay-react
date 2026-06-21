@@ -14,7 +14,7 @@ function OurProducts() {
 
     return (
         <main className="products-main">
-            <ProductList products={products} />
+            <ProductList products={products} displayed={'product-page'}/>
         </main>
     );
 }

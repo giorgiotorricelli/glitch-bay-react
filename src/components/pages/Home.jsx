@@ -14,9 +14,9 @@ function Home() {
     
     return (
 
-        <main className="homepage-main container-sm">
-            <div className="">
-                <ProductList products={products}/>
+        <main className="homepage-main">
+            <div className="container-xs">
+                <ProductList products={products} displayed={'home'}/>
             </div>
             
         </main>

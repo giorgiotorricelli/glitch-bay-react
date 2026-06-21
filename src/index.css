@@ -7,7 +7,7 @@
 }
 
 .app-container {
-  background-color: #000000;
+  background-color: #120459;
   color: white;
   min-height: 100vh;
   display: flex;
@@ -82,4 +82,33 @@
 /* Products */
 .products-main {
   padding: 0 20px;
+}
+
+/* .products-wrapper {
+  gap: 20px;
+} */
+
+.card {
+  text-align: center;
+  background: #12121a; /* Grigio scuro per staccare dallo sfondo */
+  border: 1px solid #00f0ff; /* Bordo iniziale Ciano Elettrico */
+  border-radius: 4px; /* Tagli netti, evita angoli troppo arrotondati */
+  padding: 20px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  
+  /* Neon leggero di base (Ciano) */
+  box-shadow: 0 0 5px rgba(0, 240, 255, 0.2), 
+              inset 0 0 5px rgba(0, 240, 255, 0.1);
+}
+
+/* Effetto al passaggio del mouse (Hover) */
+.card:hover {
+  transform: translateY(-5px);
+  /* Cambia colore virando sul Magenta e intensifica il neon */
+  border-color: #ff007f; 
+  box-shadow: 0 0 15px rgba(255, 0, 127, 0.4), 
+              inset 0 0 10px rgba(255, 0, 127, 0.2);
 }
