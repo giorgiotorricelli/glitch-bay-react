@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 function ProductCard({ product, displayed }) {
     return (
@@ -18,6 +18,7 @@ function ProductCard({ product, displayed }) {
                         <p className="card-text">{product.description}</p>
                     </div> : null}
                     
+                    <Link to={`/products/${product.slug}`} className="btn btn-primary mt-3">Esplora</Link>
 
                 </div>
             </div>
