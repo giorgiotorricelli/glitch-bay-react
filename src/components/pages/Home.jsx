@@ -1,71 +1,24 @@
+import { useEffect } from "react";
+import ProductList from "../ProductList";
+import { useState } from "react";
+import { fetchFive } from "../../utils/fetch";
+
 function Home() {
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        fetchFive().then((data) => {
+        setProducts(data);
+      })
+      .catch((err) => console.error("Errore nel recupero prodotti:", err));
+    }, [])
+    
     return (
 
         <main className="homepage-main">
-            <section>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione aut officiis laborum, veniam placeat impedit fugit fuga illo doloremque illum dolore.
-                    Nemo, illum ipsam? Distinctio laborum incidunt temporibus? Qui, recusandae!
-                    <br />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione aut officiis laborum, veniam placeat impedit fugit fuga illo doloremque illum dolore.
-                    Nemo, illum ipsam? Distinctio laborum incidunt temporibus? Qui, recusandae!
-                    <br />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione aut officiis laborum, veniam placeat impedit fugit fuga illo doloremque illum dolore.
-                    Nemo, illum ipsam? Distinctio laborum incidunt temporibus? Qui, recusandae!
-                    <br />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione aut officiis laborum, veniam placeat impedit fugit fuga illo doloremque illum dolore.
-                    Nemo, illum ipsam? Distinctio laborum incidunt temporibus? Qui, recusandae!
-                    <br />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione aut officiis laborum, veniam placeat impedit fugit fuga illo doloremque illum dolore.
-                    Nemo, illum ipsam? Distinctio laborum incidunt temporibus? Qui, recusandae!
-                    <br />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione aut officiis laborum, veniam placeat impedit fugit fuga illo doloremque illum dolore.
-                    Nemo, illum ipsam? Distinctio laborum incidunt temporibus? Qui, recusandae!
-                    <br />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione aut officiis laborum, veniam placeat impedit fugit fuga illo doloremque illum dolore.
-                    Nemo, illum ipsam? Distinctio laborum incidunt temporibus? Qui, recusandae!
-                    <br />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione aut officiis laborum, veniam placeat impedit fugit fuga illo doloremque illum dolore.
-                    Nemo, illum ipsam? Distinctio laborum incidunt temporibus? Qui, recusandae!
-                    <br />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione aut officiis laborum, veniam placeat impedit fugit fuga illo doloremque illum dolore.
-                    Nemo, illum ipsam? Distinctio laborum incidunt temporibus? Qui, recusandae!
-                    <br />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione aut officiis laborum, veniam placeat impedit fugit fuga illo doloremque illum dolore.
-                    Nemo, illum ipsam? Distinctio laborum incidunt temporibus? Qui, recusandae!
-                    <br />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione aut officiis laborum, veniam placeat impedit fugit fuga illo doloremque illum dolore.
-                    Nemo, illum ipsam? Distinctio laborum incidunt temporibus? Qui, recusandae!
-                    <br />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione aut officiis laborum, veniam placeat impedit fugit fuga illo doloremque illum dolore.
-                    Nemo, illum ipsam? Distinctio laborum incidunt temporibus? Qui, recusandae!
-                    <br />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione aut officiis laborum, veniam placeat impedit fugit fuga illo doloremque illum dolore.
-                    Nemo, illum ipsam? Distinctio laborum incidunt temporibus? Qui, recusandae!
-                    <br />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione aut officiis laborum, veniam placeat impedit fugit fuga illo doloremque illum dolore.
-                    Nemo, illum ipsam? Distinctio laborum incidunt temporibus? Qui, recusandae!
-                    <br />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione aut officiis laborum, veniam placeat impedit fugit fuga illo doloremque illum dolore.
-                    Nemo, illum ipsam? Distinctio laborum incidunt temporibus? Qui, recusandae!
-                    <br />
-                </p>
-            </section>
+            <div className="container-xs">
+                <ProductList products={products} displayed={'home'}/>
+            </div>
+            
         </main>
     )
 }
