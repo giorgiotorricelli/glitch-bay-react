@@ -412,3 +412,10 @@
   background: #0b0b0e;
   color: #fff;
 }
+
+/* Carousel */
+
+.side-card {
+    opacity: 0.7;
+    transform: scale(0.9);
+}
