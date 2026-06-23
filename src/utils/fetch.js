@@ -71,7 +71,6 @@ async function fetchSingle(slug) {
 async function fetchCategories() {
     try {
         const res = await fetch("http://localhost:3000/categories");
-        console.log(res);
         
         if (!res.ok) {
             throw new Error(`Errore HTTP! Stato: ${res.status}`);

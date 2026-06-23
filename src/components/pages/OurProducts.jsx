@@ -14,11 +14,12 @@ function OurProducts() {
     useEffect(() => {
         const getProducts = async () => {
             const productsFetched = await fetchAll();
-            if(productsFetched){
+            if (productsFetched) {
                 setProducts(productsFetched);
             }
         };
         getProducts();
+        
         const getCategories = async () => {
             const categoriesFetched = await fetchCategories();
             if (categoriesFetched) {
@@ -54,9 +55,12 @@ function OurProducts() {
                     throw new Error(`Errore HTTP! Stato: ${res.status}`);
                 }
                 const data = await res.json();
-                setProducts(data.result);
+                const finalProducts = data.result
+
+                setProducts(finalProducts ?? []);
             } catch (err) {
                 console.error("Errore nel recupero prodotti filtrati:", err);
+                setProducts([]);
             }
         };
 
@@ -110,8 +114,15 @@ function OurProducts() {
                     </div>
                 </section>
 
-                {/* Lista Prodotti Filtrata dal Server */}
-                <ProductList products={products} displayed={'product-page'} />
+                {products && products.length > 0 ? (
+                    <ProductList products={products} displayed={'product-page'} />
+                ) : (
+                    <div className="text-center text-white py-5">
+                        <p className="fs-4 p-font">Nessun prodotto trovato</p>
+                    </div>
+                )}
+
+                
             </main>
         </div>
     );
