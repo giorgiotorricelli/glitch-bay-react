@@ -275,7 +275,7 @@
   
   /* Applica il doppio drop-shadow direttamente all'elemento SVG generato dal componente */
   filter: drop-shadow(0px 0px 4px #00ffee) drop-shadow(0px 0px 8px rgba(0, 255, 221, 0.57));
-
+}
 
 
 /* Products Details */
