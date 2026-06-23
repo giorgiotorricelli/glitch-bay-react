@@ -102,7 +102,7 @@
   width: 100%;
   height: auto;
   filter: invert(1);
-  filter: invert(1) drop-shadow(0 0 10px #00ffff); 
+  filter: invert(1) drop-shadow(0 0 10px #00ffff);
 }
 
 /* scroll sections */
@@ -494,4 +494,16 @@
   min-width: 300px;
   max-width: 400px;
   flex: 1 1 300px;
+}
+
+/* Effetto Neon per il Cuore Attivo */
+.explore-btn.active-heart {
+  border-color: #ff007f !important;
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.6) !important;
+  background-color: rgba(255, 0, 127, 0.1) !important;
+}
+
+.explore-btn.active-heart .text-danger {
+  color: #ff007f !important;
+  /* Colore magenta neon fisso */
 }
