@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { EyeFill } from "react-bootstrap-icons";
 
 function ProductCard({ product, displayed }) {
+    const hasDiscount = product.discounted_price && product.discounted_price !== product.price;
     return (
         <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex g-4"> {/* 1. d-flex sulla colonna */}
             <div className="cyber-card w-100"> {/* 2. w-100 (e la tua classe cyberpunk) */}
@@ -11,6 +12,19 @@ function ProductCard({ product, displayed }) {
 
                     <h5 className="card-title p-font prod-name-wrapper">{product.name}</h5>
 
+                    <div className="mt-auto mb-2">
+                        {hasDiscount ? (
+                            <>
+                                <span className="text-decoration-line-through">
+                                    ${product.price}
+                                </span>
+                                <span>
+                                    ${product.discounted_price}
+                                </span>
+                            </>
+                        ) : (
+                            <h3>${product.price}</h3>
+                        )}
                     <div className="price-wrapper p-font">
                         <h3>${product.price}</h3>
                     </div>
