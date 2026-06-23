@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
-import { Heart } from "react-bootstrap-icons";
+import { Heart, HeartFill } from "react-bootstrap-icons"; // Importiamo anche HeartFill
 import { useCart } from "../context/CartContext.jsx";
+import { useWishlist } from "../context/WishlistContext.jsx"; // Nuovo import
 
 function ProductCard({ product, displayed }) {
     const { addToCart } = useCart();
+    const { toggleWishlist, isInWishlist } = useWishlist(); // Estraiamo le funzioni della wishlist
+
     const hasDiscount = product.discounted_price && product.discounted_price !== product.price;
+    const favorite = isInWishlist(product.id); // Sancisce se il prodotto è nei preferiti
 
     const handleAddToCart = () => {
         const productToCart = {
@@ -25,38 +29,34 @@ function ProductCard({ product, displayed }) {
                     <div className="price-wrapper p-font mt-auto mb-2 d-flex justify-content-center align-items-center gap-2">
                         {hasDiscount ? (
                             <>
-                                <h5 className="text-decoration-line-through cut-price mb-0">
-                                    {product.price}€
-                                </h5>
-                                <h3 className="mb-0 text-danger">{product.discounted_price}€</h3>
+                                <h5 className="text-decoration-line-through cut-price mb-0">${product.price}</h5>
+                                <h3 className="mb-0 text-danger">${product.discounted_price}</h3>
                             </>
                         ) : (
                             <h3 className="mb-0">${product.price}</h3>
                         )}
                     </div>
-
-                    {displayed === 'product-detail' && (
-                        <div className="mt-2">
-                            <p className="card-text p-font">{product.description}</p>
-                        </div>
-                    )}
                 </Link>
 
                 <div className="card-actions px-3 pb-3 mt-auto d-flex gap-2">
                     {displayed !== 'product-detail' && (
-                        <button className="btn explore-btn flex-grow-0">
-                            <Heart className="explore-eye" size={17} />
+                        /* Pulsante Cuore con Toggle e classe condizionale per l'animazione neon */
+                        <button
+                            className={`btn explore-btn flex-grow-0 ${favorite ? 'active-heart' : ''}`}
+                            onClick={() => toggleWishlist(product)}
+                        >
+                            {favorite ? (
+                                <HeartFill className="explore-eye text-danger" size={17} />
+                            ) : (
+                                <Heart className="explore-eye" size={17} />
+                            )}
                         </button>
                     )}
 
                     <button
                         onClick={handleAddToCart}
                         className="btn btn-outline-info flex-grow-1 p-font fw-bold"
-                        style={{
-                            border: '1px solid #00f0ff',
-                            color: '#00f0ff',
-                            boxShadow: '0 0 5px rgba(0, 240, 255, 0.2)'
-                        }}
+                        style={{ border: '1px solid #00f0ff', color: '#00f0ff', boxShadow: '0 0 5px rgba(0, 240, 255, 0.2)' }}
                     >
                         Aggiungi al carrello
                     </button>
