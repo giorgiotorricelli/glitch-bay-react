@@ -102,7 +102,7 @@
   width: 100%;
   height: auto;
   filter: invert(1);
-  filter: invert(1) drop-shadow(0 0 10px #00ffff); 
+  filter: invert(1) drop-shadow(0 0 10px #00ffff);
 }
 
 /* scroll sections */
@@ -148,7 +148,7 @@
 
 .section-2 {
   margin-top: 100px;
-  background-image: url('../public/imgs/img_background_glitch/bg_img_lamp.jpg');
+  background-image: url('/imgs/img_background_glitch/bg_img_lamp.jpg');
   background-position: right;
   background-size: contain;
 
@@ -157,7 +157,7 @@
 }
 
 .section-3 {
-  background-image: url('../public/imgs/img_background_glitch/bg_img_moon.jpg');
+  background-image: url('/imgs/img_background_glitch/bg_img_moon.jpg');
   background-size: contain;
   background-position: left;
 
@@ -166,7 +166,7 @@
 }
 
 .section-4 {
-  background-image: url('/imgs/img_background_glitch/bg_img_neonlamp.png');
+  background-image: url('/img_background_glitch/bg_img_neonlamp.png');
 
   /* L'equivalente di object-fit: cover per gli sfondi CSS */
   background-size: contain;
@@ -505,4 +505,14 @@
   .side-card {
     display: initial;
   }
+/* Effetto Neon per il Cuore Attivo */
+.explore-btn.active-heart {
+  border-color: #ff007f !important;
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.6) !important;
+  background-color: rgba(255, 0, 127, 0.1) !important;
+}
+
+.explore-btn.active-heart .text-danger {
+  color: #ff007f !important;
+  /* Colore magenta neon fisso */
 }
