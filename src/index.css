@@ -276,7 +276,8 @@
 
 .cut-price {
   opacity: 0.7;
-  translate: 0 20%;
+  translate: -110% 20%;
+  position: absolute;
 }
 
 .product-img {
@@ -475,14 +476,14 @@
 /* Carousel */
 
 .side-card {
-  opacity: 0.7;
-  transform: scale(0.9);
+  transform: scale(0.7);
+  transition: transform 0.3s ease;
 }
 
 .carousel-inner {
+  height: 400px;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   gap: 20px;
   width: 100%;
@@ -494,4 +495,14 @@
   min-width: 300px;
   max-width: 400px;
   flex: 1 1 300px;
+}
+
+.price-box {
+  position: relative;
+}
+
+@media screen and (min-width: 450px) {
+  .side-card {
+    display: initial;
+  }
 }
