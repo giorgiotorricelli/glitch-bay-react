@@ -29,11 +29,14 @@ function ProductCard({ product, displayed }) {
                     <div className="price-wrapper p-font mt-auto mb-2 d-flex justify-content-center align-items-center gap-2">
                         {hasDiscount ? (
                             <>
-                                <h5 className="text-decoration-line-through cut-price mb-0">${product.price}</h5>
-                                <h3 className="mb-0 text-danger">${product.discounted_price}</h3>
+                                <h5 className="text-decoration-line-through cut-price">
+                                    {product.price}€
+                                </h5>
+                                <h3 className="">{product.discounted_price}€</h3>
+                                <div className="empty-box"></div> {/*NECESSARIO: NON TOCCARE*/}
                             </>
                         ) : (
-                            <h3 className="mb-0">${product.price}</h3>
+                            <h3 className="">${product.price}</h3>
                         )}
                     </div>
                 </Link>
