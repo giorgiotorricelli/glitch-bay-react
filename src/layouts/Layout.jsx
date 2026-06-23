@@ -9,9 +9,9 @@ function Layout() {
             <header className='header'>
                 <nav className="navbar navbar-expand-lg d-flex justify-content-between align-items-center p-3">
                     <Link className="navbar-brand" to="/" ><img src="/imgs/glitch-bay-logo.png" alt="Logo" className="logo" /></Link>
-                    <div className="d-none d-lg-flex gap-4">
-                        <Link to="/products" className="text-black text-decoration-none">Our Products</Link>
-                        <Link to="/aboutus" className="text-black text-decoration-none">About Us</Link>
+                    <div className="d-none d-lg-flex gap-4 cyber-nav">
+                        <Link to="/products" className="text-white text-decoration-none cyber-link">Our Products</Link>
+                        <Link to="/aboutus" className="text-white text-decoration-none cyber-link">About Us</Link>
                     </div>
                     <button className="navbar-toggler d-lg-none" onClick={() => setIsOpen(true)}>
                         <span className="navbar-toggler-icon"></span>
