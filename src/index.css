@@ -192,30 +192,89 @@
 
 .cyber-card {
   text-align: center;
+
+  background-image: linear-gradient(to bottom, rgba(59, 21, 183, 0.607) 10%, rgba(82, 27, 141, 0.388) 70%, transparent 100%);
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 13px;
+
   background-image: linear-gradient(to bottom, rgba(59, 21, 183, 0.768) 10%, rgba(82, 27, 141, 0.5) 70%, transparent 100%);
   /* Grigio scuro per staccare dallo sfondo */
   border: 1px solid #000000;
   /* Bordo iniziale Ciano Elettrico */
   border-radius: 10px;
-  /* Tagli netti, evita angoli troppo arrotondati */
-  padding: 20px;
   color: #fff;
-  position: relative;
-  overflow: hidden;
   transition: all 0.3s ease-in-out;
+
 
   /* Neon leggero di base (Ciano) */
   box-shadow: 0px 1px 8px 3px rgba(0, 240, 255, 0.2), inset 0 0 5px rgba(0, 240, 255, 0.1);
+
+  /* ABILITA FLEXBOX SULLA CARD */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* Forza la card a prendere tutta l'altezza della colonna di Bootstrap */
 }
 
-/* Effetto al passaggio del mouse (Hover) */
+
 .cyber-card:hover {
   transform: translateY(-5px);
-  /* Cambia colore virando sul Magenta e intensifica il neon */
   border-color: #00ffb7;
   box-shadow: 0px 5px 15px rgba(4, 129, 93, 0.4), inset 0 0 10px 5px rgba(2, 80, 66, 0.2);
 }
 
+.product-img {
+  border-radius: 10px;
+}
+
+/* Rimuoviamo l'altezza fissa: se il nome è su due righe deve potersi vedere senza rompersi */
+.prod-name-wrapper {
+  margin-bottom: 15px;
+}
+
+/* Spinge tutto ciò che sta sotto (prezzo e bottone) verso il fondo della card */
+.price-wrapper {
+  margin-top: auto;
+  margin-bottom: 15px;
+}
+
+/* Rimosso absolute: ora si allinea perfettamente grazie al flexbox */
+.explore-btn {
+  align-self: flex-end; /* Spinge il bottone a destra se la card è flex */
+  width: 20%;
+  color: white;
+  background-color: rgba(152, 255, 221, 0.837) !important;
+  border: none; /* Rimuove i bordi standard di Bootstrap */
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  
+  /* Centra perfettamente l'icona di react-bootstrap dentro il bottone */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Stato base dell'icona (il tuo componente react-bootstrap) */
+.explore-eye {
+  color: #120632; /* Un colore scuro per contrastare con il fondo chiaro della base */
+  translate: 0 -10%;
+  transition: all 0.4s ease-in-out;
+}
+
+/* Hover sul BOTTONE -> Cambia il BOTTONE */
+.explore-btn:hover {
+  background-color: rgba(126, 236, 251, 0.837) !important; /* Forza il cambio rispetto all'important sopra */
+  border-color: #b400d4;
+  box-shadow: 0 0 15px #b400d4;
+}
+
+/* Hover sul BOTTONE -> Cambia l'ICONA interna */
+.explore-btn:hover .explore-eye {
+  color: #ff00a6d2; /* Ciano Neon: contrasta da dio con lo sfondo magenta del bottone! */
+  
+  /* Applica il doppio drop-shadow direttamente all'elemento SVG generato dal componente */
+  filter: drop-shadow(0px 0px 4px #00ffee) drop-shadow(0px 0px 8px rgba(0, 255, 221, 0.57));
 
 
 
