@@ -25,14 +25,14 @@ function ProductDetail() {
                         />
                     </div>
                     <div className="col-lg-6">
-                        <h1 className="cyber-title">
+                        <h1 className="cyber-title detail-font">
                             {product.name}
                         </h1>
-                        <h2 className="cyber-price mt-4">
+                        <h2 className="cyber-price mt-4 p-font">
                             ${product.price}
                         </h2>
                         <div className="cyber-line"></div>
-                        <p className="cyber-description mt-4">
+                        <p className="cyber-description mt-4 p-font">
                             {product.description}
                         </p>
                         <button className="btn cyber-btn mt-4">

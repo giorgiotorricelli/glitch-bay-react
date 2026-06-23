@@ -27,6 +27,12 @@
   font-style: normal;
 }
 
+.detail-font {
+  font-family: "Bruno Ace SC", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .app-container {
   background: #000000;
   color: white;
@@ -231,12 +237,14 @@
 /* Rimuoviamo l'altezza fissa: se il nome è su due righe deve potersi vedere senza rompersi */
 .prod-name-wrapper {
   margin-bottom: 15px;
+  text-shadow: 0 0 10px #00ffff;
 }
 
 /* Spinge tutto ciò che sta sotto (prezzo e bottone) verso il fondo della card */
 .price-wrapper {
   margin-top: auto;
   margin-bottom: 15px;
+  text-shadow: 0 0 10px #7b00ff;
 }
 
 /* Rimosso absolute: ora si allinea perfettamente grazie al flexbox */
