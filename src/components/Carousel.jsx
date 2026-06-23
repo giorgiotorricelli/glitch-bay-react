@@ -20,13 +20,13 @@ function ProductsCarousel({ items = [], loading, error, title}) {
             </div>
 
             <div className="carousel-inner">
-                <div>
+                <div className='side-card'>
                     <ProductCard product={items[prevIndex]} displayed="carousel" />
                 </div>
                 <div>
                     <ProductCard product={items[currentIndex]} displayed="carousel" />
                 </div>
-                <div>
+                <div className='side-card'>
                     <ProductCard product={items[nextIndex]} displayed="carousel" />
                 </div>
             </div>
