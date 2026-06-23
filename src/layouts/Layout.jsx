@@ -28,7 +28,9 @@ function Layout() {
                 </ul>
             </nav>
 
-            <main><Outlet /></main>
+            <main>
+                <Outlet />
+            </main>
         </div>
     );
 }

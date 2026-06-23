@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
+import { EyeFill } from "react-bootstrap-icons";
 
 function ProductCard({ product, displayed }) {
     const hasDiscount = product.discounted_price && product.discounted_price !== product.price;
     return (
-        <div className="col-6 col-md-4 col-lg-3 d-flex g-4"> {/* 1. d-flex sulla colonna */}
-            <div className="card w-100"> {/* 2. w-100 (e la tua classe cyberpunk) */}
+        <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex g-4"> {/* 1. d-flex sulla colonna */}
+            <div className="cyber-card w-100"> {/* 2. w-100 (e la tua classe cyberpunk) */}
                 <div className="card-body d-flex flex-column"> {/* 3. d-flex e flex-column sul body */}
 
-                    <img src={product.img} alt="product-img" className="img-fluid mb-3" />
+                    <img src={product.img} alt="product-img" className="img-fluid mb-3 product-img" />
 
-                    <h5 className="card-title">{product.name}</h5>
+                    <h5 className="card-title p-font prod-name-wrapper">{product.name}</h5>
 
                     <div className="mt-auto mb-2">
                         {hasDiscount ? (
@@ -24,16 +25,17 @@ function ProductCard({ product, displayed }) {
                         ) : (
                             <h3>${product.price}</h3>
                         )}
+                    <div className="price-wrapper p-font">
+                        <h3>${product.price}</h3>
                     </div>
-                    
+
                     {displayed === 'product-detail' ? <div className="mt-auto">
-                        <p className="card-text">{product.description}</p>
+                        <p className="card-text p-font">{product.description}</p>
                     </div> : null}
 
                     {displayed !== 'product-detail' ? 
-                    <Link to={`/products/${product.slug}`} className="btn btn-primary mt-3">Esplora</Link>
-                     : null}
-                    
+                    <Link to={`/products/${product.slug}`} className="btn mt-3 explore-btn"><EyeFill className="explore-eye"/></Link>
+                    : null}
                     
 
                 </div>
