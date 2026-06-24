@@ -33,11 +33,10 @@ function ProductDetail() {
                             {hasDiscount ? (
                                 <>  
                                     
-                                    <h5 className="text-decoration-line-through cut-price">
+                                    <h5 className="text-decoration-line-through cut-price-detail opacity-50">
                                         ${product.price}
                                     </h5>
                                     <h3>${product.discounted_price}</h3>
-                                    <div className="empty-box"></div>
                                 </>
                             ) : (
                                 <h3>${product.price}</h3>
