@@ -166,8 +166,7 @@
 }
 
 .section-4 {
-  background-image: url('/img_background_glitch/bg_img_neonlamp.png');
-
+  background-image: url('/imgs/img_background_glitch/bg_img_neonlamp.png');
   /* L'equivalente di object-fit: cover per gli sfondi CSS */
   background-size: contain;
 
