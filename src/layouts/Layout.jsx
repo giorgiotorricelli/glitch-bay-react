@@ -23,8 +23,8 @@ function Layout() {
                     </Link>
 
                     <div className="d-none d-lg-flex gap-3 align-items-center">
-                        <Link to="/" className="text-white text-decoration-none fw-bold">Pagina iniziale</Link>
-                        <Link to="/products" className="text-white text-decoration-none fw-bold">I Nostri Prodotti</Link>
+                        <Link to="/" className=" cyber-link text-white text-decoration-none fw-bold">Pagina iniziale</Link>
+                        <Link to="/products" className=" cyber-link text-white text-decoration-none fw-bold">I Nostri Prodotti</Link>
 
 
                         {/* Pulsante Wishlist Desktop */}
