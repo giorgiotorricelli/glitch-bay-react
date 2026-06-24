@@ -14,39 +14,44 @@ export function CartProvider({ children }) {
         localStorage.setItem("glitch_bay_cart", JSON.stringify(cart));
     }, [cart]);
 
-    // Aggiunge un prodotto al carrello o ne incrementa la quantità
+    /* Qty Handlers */
     const addToCart = (product) => {
         setCart((prevCart) => {
-            const existingItem = prevCart.find((item) => item.id === product.id);
+            const existingItem = prevCart.find((item) => item.slug === product.slug);
+            const amountToAdd = product.quantity || 1;
             if (existingItem) {
                 return prevCart.map((item) =>
-                    item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+                    item.slug === product.slug
+                        ? { ...item, quantity: item.quantity + amountToAdd }
+                        : item
                 );
             }
-            return [...prevCart, { ...product, quantity: 1 }];
+
+            return [...prevCart, { ...product, quantity: amountToAdd }];
         });
     };
-    /* Qty Handler */
-    const increaseQuantity = (productId) => {
+
+    const increaseQuantity = (productslug) => {
         setCart((prevCart) =>
             prevCart.map((item) =>
-                item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+                item.slug === productslug ? { ...item, quantity: item.quantity + 1 } : item
             )
         );
     };
-    const decreaseQuantity = (productId) => {
+
+    const decreaseQuantity = (productslug) => {
         setCart((prevCart) =>
             prevCart
                 .map((item) =>
-                    item.id === productId ? { ...item, quantity: item.quantity - 1 } : item
+                    item.slug === productslug ? { ...item, quantity: item.quantity - 1 } : item
                 )
                 .filter((item) => item.quantity > 0)
         );
     };
 
     // Rimuove un elemento specifico dal carrello
-    const removeFromCart = (productId) => {
-        setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+    const removeFromCart = (productSlug) => {
+        setCart((prevCart) => prevCart.filter((item) => item.slug !== productSlug));
     };
 
     // Svuota completamente il carrello
@@ -55,7 +60,16 @@ export function CartProvider({ children }) {
     };
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart }}>
+        <CartContext.Provider
+            value={{
+                cart,
+                addToCart,
+                increaseQuantity,
+                decreaseQuantity,
+                removeFromCart,
+                clearCart
+            }}
+        >
             {children}
         </CartContext.Provider>
     );
