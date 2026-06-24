@@ -1,17 +1,18 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { CartProvider } from './context/CartContext.jsx';
+import { WishlistProvider } from './context/WishlistContext.jsx';
 import Layout from './layouts/Layout.jsx';
 import Home from "./components/pages/Home.jsx";
 import OurProducts from './components/pages/OurProducts.jsx';
 import ProductDetail from './components/pages/ProductDetail.jsx';
-import NotFound from './components/pages/NotFound.jsx';
+import CheckoutSummary from './components/pages/CheckoutSummary.jsx';
 import ScrollReset from './components/ScrollReset.jsx';
-import { CartProvider } from './context/CartContext.jsx';
-import { WishlistProvider } from './context/WishlistContext.jsx'; // Nuovo import
+import NotFound from './components/pages/NotFound.jsx';
 
 function App() {
   return (
     <CartProvider>
-      <WishlistProvider> {/* Avvolge tutto insieme al carrello */}
+      <WishlistProvider>
         <BrowserRouter>
           <ScrollReset />
           <Routes>
@@ -19,6 +20,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="products/:slug" element={<ProductDetail />} />
               <Route path="products" element={<OurProducts />} />
+              <Route path="/checkout" element={<CheckoutSummary />}/>
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
