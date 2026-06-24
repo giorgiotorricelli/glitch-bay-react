@@ -393,6 +393,7 @@
 .btn-shop-text {
   color: #e1ecec;
   font-size: 1.2rem;
+  translate: 0 25%;
 }
 
 .cyber-btn {
@@ -552,4 +553,52 @@
 .cyber-form .cyber-select:focus {
   border-color: #ff00ff;
   box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+/* Stile base per i pulsanti del prodotto dettaglio */
+.cyber-action-btn {
+    background-color: rgba(15, 23, 42, 0.6); /* Sfondo blu scuro semitrasparente */
+    border: 1px solid #1e293b;
+    color: #94a3b8; /* Colore dell'icona spenta */
+    padding: 12px 18px; /* Aumentato il padding per renderlo più grande */
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Effetto al passaggio del mouse (Hover) */
+.cyber-action-btn:hover {
+    background-color: #0f172a;
+    border-color: #00f0ff; /* Bordino neon azzurro */
+    color: #00f0ff; /* L'icona si illumina di azzurro */
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5); /* Bagliore neon più intenso */
+}
+
+/* Stato attivo specifico per il cuore (Wishlist) quando l'elemento è aggiunto */
+.cyber-action-btn.active-heart {
+    background-color: rgba(239, 68, 68, 0.15); /* Leggero sfondo rossastro */
+    border-color: #ef4444; /* Bordo rosso neon */
+    color: #ef4444; /* Icona cuore rossa luminosa */
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.5); /* Bagliore rosso */
+}
+
+/* Passaggio sul cuore attivo */
+.cyber-action-btn.active-heart:hover {
+    background-color: rgba(239, 68, 68, 0.25);
+    border-color: #ff6b6b;
+    color: #ff6b6b;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.7);
+}
+
+/* Stile interno per le icone */
+.cyber-icon {
+    transition: transform 0.2s ease, color 0.3s ease;
+}
+
+/* Effetto di ingrandimento dell'icona all'hover */
+.cyber-action-btn:hover .cyber-icon {
+    transform: scale(1.12);
 }
