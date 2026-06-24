@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { fetchSingle } from "../../utils/fetch.js"
 import { useParams } from "react-router-dom";
-import ProductCard from "../ProductCard.jsx";
 
 function ProductDetail() {
     
@@ -11,7 +10,7 @@ function ProductDetail() {
         fetchSingle(slug).then(product => {
             setProduct(product);
         })
-    }, []);
+    }, [slug]);
     const hasDiscount = product.discounted_price && product.discounted_price !== product.price;
 
     return (
