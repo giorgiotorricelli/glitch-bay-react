@@ -109,7 +109,9 @@ function Layout() {
                                 <span>TOTAL:</span>
                                 <span className="fw-bold text-success">€{totalPrice}</span>
                             </div>
-                            <button className="btn btn-dark w-100 mb-2 border-success text-success fw-bold">VAI AL PAGAMENTO</button>
+                            <Link  to="checkout">
+                                <button className="btn btn-dark w-100 mb-2 border-success text-success fw-bold">VAI AL PAGAMENTO</button>
+                            </Link>
                             <button className="btn btn-link btn-sm w-100 text-danger text-decoration-none" onClick={clearCart}>Resetta Carrello</button>
                         </>
                     )}
