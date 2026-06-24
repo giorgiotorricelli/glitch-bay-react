@@ -4,34 +4,29 @@ const WishlistContext = createContext();
 
 export function WishlistProvider({ children }) {
     // Inizializza lo stato leggendo dal localStorage
-    const [wishlist, setWishlist] = useState(() => {
+    const [wishList, setWishList] = useState(() => {
         const localData = localStorage.getItem("glitch_bay_wishlist");
         return localData ? JSON.parse(localData) : [];
     });
 
     // Salva i dati nel localStorage ogni volta che la wishlist cambia
     useEffect(() => {
-        localStorage.setItem("glitch_bay_wishlist", JSON.stringify(wishlist));
-    }, [wishlist]);
+        localStorage.setItem("glitch_bay_wishlist", JSON.stringify(wishList));
+    }, [wishList]);
 
-    // FUNZIONE CORRETTA: Aggiunge o rimuove il prodotto (Toggle)
-    const toggleWishlist = (product) => {
-        setWishlist((prev) => { // <--- CORRETTO QUI (era setCartWishlist)
-            const exists = prev.find((item) => item.id === product.id);
-            if (exists) {
-                return prev.filter((item) => item.id !== product.id); // Rimuove se esiste già
-            }
-            return [...prev, product]; // Aggiunge se è nuovo
-        });
-    };
-
-    // Verifica se un prodotto è già presente nei preferiti
-    const isInWishlist = (productId) => {
-        return wishlist.some((item) => item.id === productId);
+    const addWishHandler = (product, isAdding) => {
+        if (isAdding) {
+            setWishList((prev) => {
+                if (prev.some((item) => item.slug === product.slug)) return prev;
+                return [...prev, product];
+            });
+        } else {
+            setWishList((prev) => prev.filter((item) => item.slug !== product.slug));
+        }
     };
 
     return (
-        <WishlistContext.Provider value={{ wishlist, toggleWishlist, isInWishlist }}>
+        <WishlistContext.Provider value={{ wishList, setWishList, addWishHandler }}>
             {children}
         </WishlistContext.Provider>
     );
