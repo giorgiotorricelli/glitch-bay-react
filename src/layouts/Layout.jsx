@@ -96,9 +96,8 @@ function Layout() {
                                                 <div className="fw-bold text-truncate small">{item.name}</div>
                                                 <div className="small text-muted">{item.quantity}x - €{item.price}</div>
                                             </div>
-                                            <button onClick={() => decreaseQuantity(item.id)}>-</button>
-                                            <span>{item.quantity}</span>
-                                            <button onClick={() => increaseQuantity(item.id)}>+</button>
+                                            <button onClick={() => increaseQuantity(item.slug)}>+</button>
+                                            <button onClick={() => decreaseQuantity(item.slug)}>-</button>
                                             <button className="btn btn-sm btn-outline-danger" onClick={() => removeFromCart(item.id)} style={{ padding: '2px 6px', fontSize: '0.75rem' }}>Elimina</button>
                                         </div>
                                     </div>
@@ -109,7 +108,7 @@ function Layout() {
                                 <span>TOTAL:</span>
                                 <span className="fw-bold text-success">€{totalPrice}</span>
                             </div>
-                            <Link  to="checkout">
+                            <Link to="checkout">
                                 <button className="btn btn-dark w-100 mb-2 border-success text-success fw-bold">VAI AL PAGAMENTO</button>
                             </Link>
                             <button className="btn btn-link btn-sm w-100 text-danger text-decoration-none" onClick={clearCart}>Resetta Carrello</button>
