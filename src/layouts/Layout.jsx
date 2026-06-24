@@ -8,11 +8,11 @@ function Layout() {
     const [isWishlistOpen, setIsWishlistOpen] = useState(false); // Stato per la seconda sidebar
 
     const { cart, removeFromCart, clearCart, increaseQuantity, decreaseQuantity } = useCart();
-    const { wishlist, toggleWishlist } = useWishlist(); // Dati della wishlist
+    const { wishList, addWishHandler } = useWishlist(); // Dati della wishlist
 
     const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
     const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-    const totalWish = wishlist.length; // Numero di elementi nei preferiti
+    const totalWish = wishList.length; // Numero di elementi nei preferiti
 
     return (
         <div className="app-container">
@@ -126,19 +126,19 @@ function Layout() {
                 </div>
                 <div className="wishlist-section p-font">
                     <h5 className="text-dark mb-3">Componenti salvati:</h5>
-                    {wishlist.length === 0 ? (
+                    {wishList.length === 0 ? (
                         <p className="text-muted small">Nessun codice salvato nei preferiti...</p>
                     ) : (
                         <div className="wishlist-items" style={{ maxHeight: "70vh", overflowY: "auto" }}>
-                            {wishlist.map((item) => (
-                                <div key={item.id} className="card mb-2 p-2 bg-light border-secondary">
+                            {wishList.map((item) => (
+                                <div key={item.slug} className="card mb-2 p-2 bg-light border-secondary">
                                     <div className="d-flex justify-content-between align-items-center text-dark">
                                         <div className="text-truncate style" style={{ maxWidth: '70%' }}>
                                             <span className="fw-bold small">{item.name}</span>
                                         </div>
                                         <button
                                             className="btn btn-sm btn-outline-danger"
-                                            onClick={() => toggleWishlist(item)}
+                                            onClick={() => addWishHandler(item)}
                                             style={{ padding: '2px 6px', fontSize: '0.75rem' }}
                                         >
                                             Rimuovi

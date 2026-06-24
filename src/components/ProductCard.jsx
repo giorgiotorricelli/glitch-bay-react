@@ -5,10 +5,10 @@ import { useWishlist } from "../context/WishlistContext.jsx"; // Nuovo import
 
 function ProductCard({ product, displayed }) {
     const { addToCart } = useCart();
-    const { toggleWishlist, isInWishlist } = useWishlist(); // Estraiamo le funzioni della wishlist
+    const { wishList, setWishList, addWishHandler } = useWishlist(); // Estraiamo le funzioni della wishlist
+    const isAdded = Array.isArray(wishList) && wishList.some((item) => item.slug === product.slug);
 
     const hasDiscount = product.discounted_price && product.discounted_price !== product.price;
-    const favorite = isInWishlist(product.id); // Sancisce se il prodotto è nei preferiti
 
     const handleAddToCart = () => {
         const productToCart = {
@@ -34,7 +34,7 @@ function ProductCard({ product, displayed }) {
                                 <h3 className="">{product.discounted_price}€</h3>
                             </div>
                         ) : (
-                            <h3 className="">{product.price}€</h3>
+                            <h3 className="">${product.price}</h3>
                         )}
                     </div>
                 </Link>
@@ -43,10 +43,14 @@ function ProductCard({ product, displayed }) {
                     {displayed !== 'product-detail' && (
                         /* Pulsante Cuore con Toggle e classe condizionale per l'animazione neon */
                         <button
-                            className={`btn explore-btn flex-grow-0 ${favorite ? 'active-heart' : ''}`}
-                            onClick={() => toggleWishlist(product)}
+                            className={`btn explore-btn flex-grow-0 ${isAdded ? 'active-heart' : ''}`}
+                            onClick={(e) => {
+                        e.stopPropagation();
+                        // Passiamo l'inverso di isLiked
+                        addWishHandler(product, !isAdded);
+                    }}
                         >
-                            {favorite ? (
+                            {isAdded ? (
                                 <HeartFill className="explore-eye text-danger" size={17} />
                             ) : (
                                 <Heart className="explore-eye" size={17} />
