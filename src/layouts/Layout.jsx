@@ -2,6 +2,7 @@ import { Outlet, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useCart } from '../context/CartContext.jsx';
 import { useWishlist } from '../context/WishlistContext.jsx'; // Nuovo import
+import { HeartFill, Cart3, PlusCircle } from 'react-bootstrap-icons';
 
 function Layout() {
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -28,32 +29,30 @@ function Layout() {
 
 
                         {/* Pulsante Wishlist Desktop */}
-                        <button
-                            className="btn btn-dark position-relative p-font"
+                        <span
+                            className="btn position-relative p-font btn-preferiti p-font"
                             onClick={() => setIsWishlistOpen(true)}
-                            style={{ border: '1px solid #ff007f', boxShadow: '0 0 5px rgba(255, 0, 127, 0.4)' }}
                         >
-                            ❤️ Preferiti
+                            <HeartFill className='cuore-preferiti'/> Preferiti
                             {totalWish > 0 && (
                                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-magenta" style={{ backgroundColor: '#ff007f' }}>
                                     {totalWish}
                                 </span>
                             )}
-                        </button>
+                        </span>
 
                         {/* Pulsante Carrello Desktop */}
-                        <button
-                            className="btn btn-dark position-relative p-font"
+                        <span
+                            className="btn position-relative p-font btn-carrello p-font"
                             onClick={() => setIsCartOpen(true)}
-                            style={{ border: '1px solid #00f0ff', boxShadow: '0 0 5px rgba(0, 240, 255, 0.4)' }}
                         >
-                            🛒 Carrello
+                            <Cart3 className='icona-carrello'/> Carrello
                             {totalItems > 0 && (
                                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                     {totalItems}
                                 </span>
                             )}
-                        </button>
+                        </span>
                     </div>
 
                     {/* Controlli Mobile */}

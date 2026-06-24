@@ -105,6 +105,72 @@
   filter: invert(1) drop-shadow(0 0 10px #00ffff);
 }
 
+/* ICONE NAV BAR*/
+
+.btn-preferiti {
+  color: white;
+  background-color: rgba(152, 255, 221, 0.837) !important;
+  border: none;
+  /* Rimuove i bordi standard di Bootstrap */
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.cuore-preferiti {
+  color: #120632;
+  /* Un colore scuro per contrastare con il fondo chiaro della base */
+  translate: 0 -10%;
+  transition: all 0.4s ease-in-out;
+}
+
+/* Hover sul BOTTONE -> Cambia il BOTTONE */
+.btn-preferiti:hover {
+  background-color: rgba(126, 236, 251, 0.837) !important;
+  /* Forza il cambio rispetto all'important sopra */
+  border-color: #b400d4;
+  box-shadow: 0 0 15px #b400d4;
+}
+
+/* Hover sul BOTTONE -> Cambia l'ICONA interna */
+.btn-preferiti:hover .cuore-preferiti {
+  color: #ff00a6d2;
+  /* Ciano Neon: contrasta da dio con lo sfondo magenta del bottone! */
+
+  /* Applica il doppio drop-shadow direttamente all'elemento SVG generato dal componente */
+  filter: drop-shadow(0px 0px 4px #00ffee) drop-shadow(0px 0px 8px rgba(0, 255, 221, 0.57));
+}
+
+.btn-carrello {
+  color: white;
+  background-color: rgba(152, 255, 221, 0.837) !important;
+  border: none;
+  /* Rimuove i bordi standard di Bootstrap */
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.icona-carrello {
+  color: #120632;
+  /* Un colore scuro per contrastare con il fondo chiaro della base */
+  translate: 0 -10%;
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-carrello:hover {
+  background-color: rgba(126, 236, 251, 0.837) !important;
+  /* Forza il cambio rispetto all'important sopra */
+  border-color: #b400d4;
+  box-shadow: 0 0 15px #b400d4;
+}
+
+.btn-carrello:hover .icona-carrello {
+  color: #ff00a6d2;
+  /* Ciano Neon: contrasta da dio con lo sfondo magenta del bottone! */
+
+  /* Applica il doppio drop-shadow direttamente all'elemento SVG generato dal componente */
+  filter: drop-shadow(0px 0px 4px #00ffee) drop-shadow(0px 0px 8px rgba(0, 255, 221, 0.57));
+}
+
 /* scroll sections */
 
 .scroll-section {
@@ -184,8 +250,8 @@
 .sidebar {
   position: fixed;
   top: 0;
-  right: -300px;
-  width: 300px;
+  right: -350px;
+  width: 350px;
   height: 100%;
   background: #fff;
   transition: 0.3s;
