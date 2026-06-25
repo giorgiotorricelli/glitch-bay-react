@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Heart, HeartFill, PlusCircle, DashCircle, Trash } from "react-bootstrap-icons";
+import { Heart, HeartFill, PlusCircle, DashCircle, Cart3, Trash } from "react-bootstrap-icons";
 import { useCart } from "../context/CartContext.jsx";
 import { useWishlist } from "../context/WishlistContext.jsx"; // Nuovo import
 
@@ -100,14 +100,14 @@ function ProductCard({ product, displayed, viewMode }) {
                 ) : (
                     <button
                         onClick={handleAddToCart}
-                        className="btn btn-outline-info flex-grow-1 p-font fw-bold"
+                        className="btn btn-outline-info flex-grow-0 p-font fw-bold"
                         style={{
                             border: '1px solid #00f0ff',
                             color: '#00f0ff',
                             boxShadow: '0 0 5px rgba(0, 240, 255, 0.2)'
                         }}
                     >
-                        Aggiungi al carrello
+                        <Cart3/>
                     </button>
                 )}
             </div>
