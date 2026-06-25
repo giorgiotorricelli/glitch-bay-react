@@ -710,6 +710,7 @@
 /* Effetto di ingrandimento dell'icona all'hover */
 .cyber-action-btn:hover .cyber-icon {
     transform: scale(1.12);
+}
 /*Carrello */
 .cyber-titleShop {
   color: #00ffff;
