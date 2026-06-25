@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import { fetchFive, fetchTopSeller } from "../../utils/fetch";
 import ProductsCarousel from "../Carousel";
 
@@ -56,7 +57,14 @@ function Home() {
                     loading={loading}
                     error={error}
                 />
-            </div>
+
+                <div className="d-flex flex-column align-items-center my-5 pt-4">
+                    <p className="p-font text-muted small text-uppercase tracking-wider mb-2">
+                    </p>
+                    <Link to="/products" className="btn-distopic-cta">
+                        Esplora i nostri prodotti
+                    </Link>
+                </div>            </div>
             <div className="scroll-section section-1 position-absolute">
 
             </div>
