@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ProductList from "../ProductList";
 import { fetchAll, fetchCategories } from "../../utils/fetch";
 import { ArrowDown, ArrowUp } from "react-bootstrap-icons";
+import BtnScrollUp from "../BtnScrollUp";
 
 function OurProducts() {
     const [products, setProducts] = useState([]);
@@ -80,7 +81,12 @@ function OurProducts() {
 
     return (
         <div className="products-page">
+            <div className="md-2 ms-md-4">
+                <BtnScrollUp/>
+            </div>
+            
             <main className="products-main container py-5">
+                
                 <section className="row g-3 justify-content-center mb-5 cyber-controls-bar align-items-center">
 
                     {/* SEARCH */}

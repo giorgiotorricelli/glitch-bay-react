@@ -293,6 +293,28 @@
   mask-image: linear-gradient(to right, black 70%, transparent 100%);
 }
 
+/* BOTTONE SCROLL UP*/
+
+.btn-scroll-wrapper {
+   z-index: 10;
+   height: 6vh;
+   width: 6vw;
+   bottom: 22px;
+}
+
+.btn-scroll-up {
+  color: white;
+  cursor: pointer;
+  z-index: 11;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-scroll-up:hover {
+  color: #93ff87;
+  filter: drop-shadow(0px 0px 4px #c6ff80) drop-shadow(0px 0px 8px rgba(166, 255, 0, 0.57));
+  transform: translateY(-2px);
+}
+
 /* Navbar + Sidebar */
 .sidebar {
   position: fixed;
