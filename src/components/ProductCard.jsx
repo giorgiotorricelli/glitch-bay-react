@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
-import { Heart, HeartFill, PlusCircle, DashCircle, Cart3 } from "react-bootstrap-icons"; // Importiamo anche HeartFill
+import { Heart, HeartFill, PlusCircle, DashCircle, Cart3, Trash } from "react-bootstrap-icons";
 import { useCart } from "../context/CartContext.jsx";
 import { useWishlist } from "../context/WishlistContext.jsx"; // Nuovo import
 
-function ProductCard({ product, displayed }) {
+function ProductCard({ product, displayed, viewMode }) {
+    const isList = viewMode === 'list';
     const {
         cart,
         addToCart,
         increaseQuantity,
-        decreaseQuantity
+        decreaseQuantity,
+        removeFromCar
     } = useCart();
     const { wishList, setWishList, addWishHandler } = useWishlist(); // Estraiamo le funzioni della wishlist
     const isAdded = Array.isArray(wishList) && wishList.some((item) => item.slug === product.slug);
@@ -76,7 +78,7 @@ function ProductCard({ product, displayed }) {
                             padding: '4px 8px'
                         }}
                     >
-
+                        
                         <span className="fw-bold p-font qty-display">
                             {cartItem.quantity}
                         </span>
@@ -85,14 +87,14 @@ function ProductCard({ product, displayed }) {
                             className="btn qty-btn d-flex align-items-center justify-content-center p-0 fw-bold me-2"
                             onClick={() => decreaseQuantity(product.slug)}
                         >
-                            <DashCircle/>
+                            <DashCircle />
                         </button>
 
                         <button
                             className="btn qty-btn d-flex align-items-center justify-content-center p-0 fw-bold"
                             onClick={() => increaseQuantity(product.slug)}
                         >
-                            <PlusCircle/>
+                            <PlusCircle />
                         </button>
                     </div>
                 ) : (
