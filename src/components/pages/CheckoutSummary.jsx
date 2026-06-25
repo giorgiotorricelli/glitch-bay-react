@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useCart } from '../../context/CartContext';
+import { formatphoneNumber } from '../../utils/functions';
 
 const blanckOBJ = {
     payment_methods: '',
@@ -19,7 +20,8 @@ function CheckoutSummary() {
 
     const changeHandler = (event) => {
         const { name, value } = event.target;
-        const tempData = { ...formData, [name]: value };
+        const checkValue = name === 'phone'? formatphoneNumber(value, event.nativeEvent.inputType) : value
+        const tempData = { ...formData, [name]: checkValue };
         setFormData(tempData);
     }
 

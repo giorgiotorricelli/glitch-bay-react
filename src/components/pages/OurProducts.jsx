@@ -1,28 +1,42 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom"; // Importazione da react-router-dom
 import ProductList from "../ProductList";
-import { fetchAll, fetchCategories } from "../../utils/fetch";
+import { fetchCategories } from "../../utils/fetch";
 import { ArrowDown, ArrowUp } from "react-bootstrap-icons";
 
 function OurProducts() {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("");
-    const [direction, setDirection] = useState(false);
-    const [selectedOrder, setSelectedOrder] = useState('');
-    const orderOptions = [{label: 'Nome', value: 'name'}, {lable: 'Prezzo', value: 'price'}, {label: 'Data', value: 'created_at'}];
+    const [searchParams, setSearchParams] = useSearchParams();
 
 
+    const searchQuery = searchParams.get("search") || "";
+    const selectedCategoryName = searchParams.get("category") || "";
+    const selectedOrder = searchParams.get("order") || "";
+    const directionParam = searchParams.get("direction") || "DESC"; 
+    const direction = directionParam === "ASC";
+
+    console.log(categories);
+    
+
+    const orderOptions = [
+        { label: 'Nome', value: 'name' }, 
+        { label: 'Prezzo', value: 'price' }, 
+        { label: 'Data', value: 'created_at' }
+    ];
+
+
+    const updateSearchParams = (key, value) => {
+        const newParams = new URLSearchParams(searchParams);
+        if (value) {
+            newParams.set(key, value);
+        } else {
+            newParams.delete(key);
+        }
+        setSearchParams(newParams);
+    };
 
     useEffect(() => {
-        const getProducts = async () => {
-            const productsFetched = await fetchAll();
-            if (productsFetched) {
-                setProducts(productsFetched);
-            }
-        };
-        getProducts();
-
         const getCategories = async () => {
             const categoriesFetched = await fetchCategories();
             if (categoriesFetched) {
@@ -32,51 +46,46 @@ function OurProducts() {
         getCategories();
     }, []);
 
-
     useEffect(() => {
         const fetchFilteredProducts = async () => {
             const params = new URLSearchParams();
-
-            if (searchQuery.trim() !== "") {
-                params.append("search", searchQuery.trim());
+            const searchedString = searchParams.get('search') || '';
+            if (searchedString.trim() !== ''){
+                params.append('search', searchedString.trim());
             }
-
-            if (selectedCategory !== "") {
-                params.append("category", selectedCategory); // Passa l'ID della categoria
-            }
-
-            if (selectedOrder !== '') {
-                params.append('order', selectedOrder);
-
-                if (direction) {
-                    params.append('direction', 'ASC');
-                } else {
-                    params.append('direction', 'DESC');
+            if(selectedCategoryName !== "" && categories.length > 0){
+                const foundCategory = categories.find(category => {
+                    return category.name.toLowerCase() === selectedCategoryName.toLowerCase()
+                })
+                if (foundCategory){
+                    params.append('category', foundCategory.id);
                 }
             }
-
-
+            if (selectedOrder !== ''){
+                params.append('order', selectedOrder);
+                params.append('direction', direction ? 'ASC' : 'DESC');
+            }
 
             const queryString = params.toString();
             const url = `http://localhost:3000/products${queryString ? `?${queryString}` : ""}`;
-
-            try {
-                const res = await fetch(url);
-                if (!res.ok) {
-                    throw new Error(`Errore HTTP! Stato: ${res.status}`);
+            try{
+                const result = await fetch(url);
+                if(!result.ok){
+                    throw new Error(`Errore HTTP! Stato: ${result.status}`)
                 }
-                const data = await res.json();
-                const finalProducts = data.result
-
-                setProducts(finalProducts ?? []);
-            } catch (err) {
-                console.error("Errore nel recupero prodotti filtrati:", err);
+                const data = await result.json();
+                const finalProductsList = data.result;
+                setProducts(finalProductsList ?? []);
+            }catch(error){
+                console.error("Errore nel recupero prodotti filtrati:", error);
                 setProducts([]);
             }
-        };
+        }
+        if (categories.length > 0 || selectedCategoryName === ''){
+            fetchFilteredProducts();
+        }
 
-        fetchFilteredProducts();
-    }, [searchQuery, selectedCategory, selectedOrder, direction]);
+    }, [searchParams, categories, searchQuery, selectedCategoryName, selectedOrder, direction]);
 
     return (
         <div className="products-page">
@@ -86,12 +95,12 @@ function OurProducts() {
                     {/* SEARCH */}
                     <div className="col-12 col-md-5">
                         <div className="input-group">
-                            <span className="input-group-text cyber-addon"><i class="bi bi-search"></i></span>
+                            <span className="input-group-text cyber-addon"><i className="bi bi-search"></i></span>
                             <input
                                 type="text"
                                 placeholder="Cerca hardware..."
                                 value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onChange={(e) => updateSearchParams("search", e.target.value)}
                                 className="form-control cyber-input p-font"
                             />
                         </div>
@@ -100,42 +109,56 @@ function OurProducts() {
                     {/* SELECT CATEGORIES */}
                     <div className="col-6 col-md-4">
                         <select
-                            value={selectedCategory}
-                            onChange={(e) => setSelectedCategory(e.target.value)}
+                            value={selectedCategoryName}
+                            onChange={(e) => updateSearchParams("category", e.target.value)}
                             className="form-select cyber-select p-font"
                         >
                             <option value="">Tutte le categorie</option>
                             {categories.map((cat) => (
-                                <option key={cat.id} value={cat.id}>
+                                <option key={cat.id} value={cat.name}>
                                     {cat.name}
                                 </option>
                             ))}
                         </select>
                     </div>
 
-                    {/* BUTTON ORDER */}
-                    <div className="col-6 col-md-3 d-grid">
+                    {/* SELECT & BUTTON ORDER */}
+                    <div className="col-6 col-md-3 d-grid gap-2">
                         <select
                             value={selectedOrder}
-                            onChange={(e) => setSelectedOrder(e.target.value)}
+                            onChange={(e) => {
+                                const val = e.target.value;
+                                const newParams = new URLSearchParams(searchParams);
+                                if (val) {
+                                    newParams.set("order", val);
+                                    if (!newParams.has("direction")) {
+                                        newParams.set("direction", "DESC");
+                                    }
+                                } else {
+                                    newParams.delete("order");
+                                    newParams.delete("direction");
+                                }
+                                setSearchParams(newParams);
+                            }}
                             className="form-select cyber-select p-font"
                         >
                             <option value="">Ordina Per</option>
                             {orderOptions.map((opt) => (
-                                
-                                <option key={opt.value} value={opt.value} className=" text-capitalize">
-                                    {opt.lable}
+                                <option key={opt.value} value={opt.value} className="text-capitalize">
+                                    {opt.label}
                                 </option>
                             ))}
                         </select>
-                        <button
-                            type="button"
-                            onClick={() => setDirection(!direction)}
-                            className={`btn p-font ${direction ? 'btn-warning' : 'btn-outline-light'}`}
-                        >
-                            {direction ? <ArrowDown /> : <ArrowUp />}
-                        </button>
-
+                        
+                        {selectedOrder && (
+                            <button
+                                type="button"
+                                onClick={() => updateSearchParams("direction", direction ? "DESC" : "ASC")}
+                                className={`btn p-font ${direction ? 'btn-warning' : 'btn-outline-light'}`}
+                            >
+                                {direction ? <ArrowDown /> : <ArrowUp />}
+                            </button>
+                        )}
                     </div>
                 </section>
 
@@ -146,8 +169,6 @@ function OurProducts() {
                         <p className="fs-4 p-font">Nessun prodotto trovato</p>
                     </div>
                 )}
-
-
             </main>
         </div>
     );
