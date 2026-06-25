@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ProductList from "../ProductList";
 import { fetchAll, fetchCategories } from "../../utils/fetch";
-import { ArrowDown, ArrowUp } from "react-bootstrap-icons";
+import { ArrowDown, ArrowUp, Grid3x3Gap, ListUl } from "react-bootstrap-icons";
 
 function OurProducts() {
     const [products, setProducts] = useState([]);
@@ -10,8 +10,8 @@ function OurProducts() {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [direction, setDirection] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState('');
-    const orderOptions = [{label: 'Nome', value: 'name'}, {lable: 'Prezzo', value: 'price'}, {label: 'Data', value: 'created_at'}];
-
+    const orderOptions = [{ label: 'Nome', value: 'name' }, { label: 'Prezzo', value: 'price' }, { label: 'Data', value: 'created_at' }];
+    const [viewMode, setViewMode] = useState('grid');
 
 
     useEffect(() => {
@@ -122,7 +122,7 @@ function OurProducts() {
                         >
                             <option value="">Ordina Per</option>
                             {orderOptions.map((opt) => (
-                                
+
                                 <option key={opt.value} value={opt.value} className=" text-capitalize">
                                     {opt.lable}
                                 </option>
@@ -137,10 +137,30 @@ function OurProducts() {
                         </button>
 
                     </div>
+                    <div className="col-12 col-md-2 d-flex justify-content-md-end justify-content-center">
+                        <div className="btn-group" role="group" aria-label="Visualizzazione prodotti">
+                            <button
+                                type="button"
+                                className={`btn ${viewMode === 'grid' ? 'btn-warning' : 'btn-outline-light'}`}
+                                onClick={() => setViewMode('grid')}
+                                title="Visualizzazione a griglia"
+                            >
+                                <Grid3x3Gap />
+                            </button>
+                            <button
+                                type="button"
+                                className={`btn ${viewMode === 'list' ? 'btn-warning' : 'btn-outline-light'}`}
+                                onClick={() => setViewMode('list')}
+                                title="Visualizzazione a lista"
+                            >
+                                <ListUl />
+                            </button>
+                        </div>
+                    </div>
                 </section>
 
                 {products && products.length > 0 ? (
-                    <ProductList products={products} displayed={'product-page'} />
+                    <ProductList products={products} displayed={'product-page'} viewMode={viewMode}/>
                 ) : (
                     <div className="text-center text-white py-5">
                         <p className="fs-4 p-font">Nessun prodotto trovato</p>
