@@ -148,7 +148,7 @@ function CheckoutSummary() {
                                     <input type="text" id="address" name="address" className="form-control cyber-input" onChange={changeHandler} value={formData.address} required />
                                 </div>
                                 <div className="col-12">
-                                    <label htmlFor="mail" className="form-label text-white-50 small">Mail di Rete</label>
+                                    <label htmlFor="mail" className="form-label text-white-50 small">Indirizzo Mail</label>
                                     <input type="email" id="mail" name="mail" className="form-control cyber-input"
                                         pattern="[a-zA-Z0-9._%\+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
                                         placeholder="esempio@dominio.com"
@@ -157,7 +157,7 @@ function CheckoutSummary() {
                                         required />
                                 </div>
                                 <div className="col-12">
-                                    <label htmlFor="phone" className="form-label text-white-50 small">Recapito Telefonico Comms</label>
+                                    <label htmlFor="phone" className="form-label text-white-50 small">Recapito Telefonico </label>
                                     <input type="tel" id="phone" name="phone" className="form-control cyber-input" minLength={10}
                                         pattern="^\+39\s\d{3}\s\d{7}$"
                                         placeholder="+39 333 1234567"
@@ -166,12 +166,12 @@ function CheckoutSummary() {
                                         required />
                                 </div>
                                 <div className="col-12">
-                                    <label htmlFor="payment" className="form-label text-white-50 small">Canale di Pagamento</label>
+                                    <label htmlFor="payment" className="form-label text-white-50 small">Metodo Pagamento</label>
                                     <select id="payment" name="payment_methods" className="form-select cyber-select" onChange={changeHandler} value={formData.payment_methods} required>
                                         <option disabled value="">Scegli un'opzione...</option>
-                                        <option value="stripe">Stripe (Valuta Standard)</option>
-                                        <option value="paypal">PayPal (Crediti Rete)</option>
-                                        <option value="crypto">Crypto (Chiave Decentralizzata)</option>
+                                        <option value="stripe">Stripe</option>
+                                        <option value="paypal">PayPal</option>
+                                        <option value="crypto">Crypto</option>
                                     </select>
                                 </div>
                                 <div className="col-12 mt-4 d-grid">
