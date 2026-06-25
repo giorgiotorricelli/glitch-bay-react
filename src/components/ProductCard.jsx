@@ -4,9 +4,18 @@ import { useCart } from "../context/CartContext.jsx";
 import { useWishlist } from "../context/WishlistContext.jsx"; // Nuovo import
 
 function ProductCard({ product, displayed }) {
-    const { addToCart } = useCart();
+    const {
+        cart,
+        addToCart,
+        increaseQuantity,
+        decreaseQuantity
+    } = useCart();
     const { wishList, setWishList, addWishHandler } = useWishlist(); // Estraiamo le funzioni della wishlist
     const isAdded = Array.isArray(wishList) && wishList.some((item) => item.slug === product.slug);
+
+    const cartItem = cart.find(
+        (item) => item.slug === product.slug
+    );
 
     const hasDiscount = product.discounted_price && product.discounted_price !== product.price;
 
@@ -58,13 +67,53 @@ function ProductCard({ product, displayed }) {
                     </button>
                 )}
 
-                <button
-                    onClick={handleAddToCart}
-                    className="btn btn-outline-info flex-grow-1 p-font fw-bold"
-                    style={{ border: '1px solid #00f0ff', color: '#00f0ff', boxShadow: '0 0 5px rgba(0, 240, 255, 0.2)' }}
-                >
-                    Aggiungi al carrello
-                </button>
+                {cartItem ? (
+                    <div
+                        className="d-flex align-items-center justify-content-between flex-grow-1 cyber-qty-box "
+                        style={{
+                            border: '1px solid #00f0ff',
+                            borderRadius: '8px',
+                            padding: '4px 8px'
+                        }}
+                    >
+                        <button
+                            className="btn btn-outline-info btn-sm"
+                            onClick={() => decreaseQuantity(product.slug)}
+                        >
+                            -
+                        </button>
+
+                        <span
+                            className="fw-bold"
+                            style={{
+                                color: '#00f0ff',
+                                minWidth: '30px',
+                                textAlign: 'center'
+                            }}
+                        >
+                            {cartItem.quantity}
+                        </span>
+
+                        <button
+                            className="btn btn-outline-info btn-sm"
+                            onClick={() => increaseQuantity(product.slug)}
+                        >
+                            +
+                        </button>
+                    </div>
+                ) : (
+                    <button
+                        onClick={handleAddToCart}
+                        className="btn btn-outline-info flex-grow-1 p-font fw-bold"
+                        style={{
+                            border: '1px solid #00f0ff',
+                            color: '#00f0ff',
+                            boxShadow: '0 0 5px rgba(0, 240, 255, 0.2)'
+                        }}
+                    >
+                        Aggiungi al carrello
+                    </button>
+                )}
             </div>
 
         </div>
