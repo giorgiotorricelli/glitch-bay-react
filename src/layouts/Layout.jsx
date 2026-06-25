@@ -2,6 +2,7 @@ import { Outlet, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useCart } from '../context/CartContext.jsx';
 import { useWishlist } from '../context/WishlistContext.jsx'; // Nuovo import
+import { HeartFill, Cart3, PlusCircle } from 'react-bootstrap-icons';
 
 function Layout() {
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -28,44 +29,48 @@ function Layout() {
 
 
                         {/* Pulsante Wishlist Desktop */}
-                        <button
-                            className="btn btn-dark position-relative p-font"
+                        <span
+                            className="btn position-relative p-font btn-preferiti"
                             onClick={() => setIsWishlistOpen(true)}
-                            style={{ border: '1px solid #ff007f', boxShadow: '0 0 5px rgba(255, 0, 127, 0.4)' }}
                         >
-                            ❤️ Preferiti
+                            <HeartFill className='cuore-preferiti' /> Preferiti
                             {totalWish > 0 && (
                                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-magenta" style={{ backgroundColor: '#ff007f' }}>
                                     {totalWish}
                                 </span>
                             )}
-                        </button>
+                        </span>
 
                         {/* Pulsante Carrello Desktop */}
-                        <button
-                            className="btn btn-dark position-relative p-font"
+                        <span
+                            className="btn position-relative p-font btn-carrello p-font"
                             onClick={() => setIsCartOpen(true)}
-                            style={{ border: '1px solid #00f0ff', boxShadow: '0 0 5px rgba(0, 240, 255, 0.4)' }}
                         >
-                            🛒 Carrello
+                            <Cart3 className='icona-carrello' /> Carrello
                             {totalItems > 0 && (
                                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                     {totalItems}
                                 </span>
                             )}
-                        </button>
+                        </span>
                     </div>
 
                     {/* Controlli Mobile */}
                     <div className="d-lg-none d-flex gap-2">
-                        <button className="btn btn-sm btn-outline-light position-relative" onClick={() => setIsWishlistOpen(true)}>
-                            ❤️ {totalWish > 0 && <span className="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>}
+                        {/* Bottone Preferiti */}
+                        <button className="btn btn-sm btn-preferiti position-relative px-3" onClick={() => setIsWishlistOpen(true)}>
+                            <HeartFill className='cuore-preferiti' />
+                            {totalWish > 0 && (
+                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ fontSize: '0.6rem' }}>{totalWish}</span>
+                            )}
                         </button>
-                        <button className="navbar-toggler position-relative" onClick={() => setIsCartOpen(true)}>
-                            <span className="navbar-toggler-icon"></span>
+
+                        {/* Bottone Carrello (Corretto) */}
+                        <button className="btn btn-sm btn-carrello position-relative px-3" onClick={() => setIsCartOpen(true)}>
+                            <Cart3 className="icona-carrello" /> {/* Ho aggiunto anche la tua classe per l'icona */}
                             {totalItems > 0 && (
                                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ fontSize: '0.6rem' }}>
-                                    {totalItems}
+                                    {totalItems} {/* <--- IMPORTANTE: Inserisci il numero qui per renderlo visibile */}
                                 </span>
                             )}
                         </button>
@@ -78,8 +83,8 @@ function Layout() {
 
             {/* SIDEBAR 1: IL CARRELLO */}
             <nav className={`sidebar ${isCartOpen ? 'active' : ''}`}>
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                    <h4 className="text-dark title-font">Glitch Bag</h4>
+                <div className="d-flex justify-content-between align-items-center mb-3 gap-4 flex-wrap">
+                    <h4 className="cyber-glitch-title cyber-cart-section title-font">Glitch Bag</h4>
                     <button className="close-btn" onClick={() => setIsCartOpen(false)}>×</button>
                 </div>
                 <div className="cart-section p-font">
@@ -88,17 +93,24 @@ function Layout() {
                         <p className="text-muted small">Nessun pacchetto rilevato nel sistema...</p>
                     ) : (
                         <>
-                            <div className="cart-items" style={{ maxHeight: "55vh", overflowY: "auto" }}>
+                            <div className="cart-items" style={{ maxHeight: "95vh", overflowY: "auto" }}>
                                 {cart.map((item) => (
-                                    <div key={item.slug} className="card mb-2 p-2 bg-light border-secondary">
-                                        <div className="d-flex justify-content-between align-items-center text-dark">
+                                    <div key={item.id} className="card mb-2 p-2 cyber-card-item">
+                                        <div className="d-flex justify-content-between align-items-center flex-wrap text-dark">
                                             <div style={{ maxWidth: '70%' }}>
                                                 <div className="fw-bold text-truncate small">{item.name}</div>
                                                 <div className="small text-muted">{item.quantity}x - €{item.price}</div>
                                             </div>
-                                            <button onClick={() => increaseQuantity(item.slug)}>+</button>
-                                            <button onClick={() => decreaseQuantity(item.slug)}>-</button>
-                                            <button className="btn btn-sm btn-outline-danger" onClick={() => removeFromCart(item.slug)} style={{ padding: '2px 6px', fontSize: '0.75rem' }}>Elimina</button>
+
+
+
+
+                                            <button className="cyber-quantity-btn" onClick={() => increaseQuantity(item.slug)}>+</button>
+                                            <button className="cyber-quantity-btn" onClick={() => decreaseQuantity(item.slug)}>-</button>
+                                            <button className="btn btn-sm cyber-delete-btn" onClick={() => removeFromCart(item.slug)} style={{ padding: '2px 6px', fontSize: '0.75rem' }}>Elimina</button>
+
+
+
                                         </div>
                                     </div>
                                 ))}
@@ -109,9 +121,9 @@ function Layout() {
                                 <span className="fw-bold text-success">€{totalPrice}</span>
                             </div>
                             <Link to="checkout">
-                                <button className="btn btn-dark w-100 mb-2 border-success text-success fw-bold">VAI AL PAGAMENTO</button>
+                                <button className="cyber-checkout-btn w-100 mb-2 ">VAI AL PAGAMENTO</button>
                             </Link>
-                            <button className="btn btn-link btn-sm w-100 text-danger text-decoration-none" onClick={clearCart}>Resetta Carrello</button>
+                            <button className="cyber-reset-btn w-100 w-100 " onClick={clearCart}>Resetta Carrello</button>
                         </>
                     )}
                 </div>

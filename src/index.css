@@ -39,13 +39,14 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 
 /* Header */
 .header {
   width: 100%;
-  height: 15vh;
+  height: 23vh;
   background: linear-gradient(180deg,
       #16213e 0%,
       #071129 50%,
@@ -96,6 +97,10 @@
   width: 100%;
 }
 
+.navbar-brand {
+  max-width: 30%;
+}
+
 .logo {
   display: block;
   max-width: 200px;
@@ -105,15 +110,83 @@
   filter: invert(1) drop-shadow(0 0 10px #00ffff);
 }
 
+/* ICONE NAV BAR*/
+
+.btn-preferiti {
+  color: white;
+  background-color: rgba(152, 255, 221, 0.837) !important;
+  border: none;
+  /* Rimuove i bordi standard di Bootstrap */
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.cuore-preferiti {
+  color: #120632;
+  /* Un colore scuro per contrastare con il fondo chiaro della base */
+  translate: 0 -10%;
+  transition: all 0.4s ease-in-out;
+}
+
+/* Hover sul BOTTONE -> Cambia il BOTTONE */
+.btn-preferiti:hover {
+  background-color: rgba(126, 236, 251, 0.837) !important;
+  /* Forza il cambio rispetto all'important sopra */
+  border-color: #b400d4;
+  box-shadow: 0 0 15px #b400d4;
+}
+
+/* Hover sul BOTTONE -> Cambia l'ICONA interna */
+.btn-preferiti:hover .cuore-preferiti {
+  color: #ff00a6d2;
+  /* Ciano Neon: contrasta da dio con lo sfondo magenta del bottone! */
+
+  /* Applica il doppio drop-shadow direttamente all'elemento SVG generato dal componente */
+  filter: drop-shadow(0px 0px 4px #00ffee) drop-shadow(0px 0px 8px rgba(0, 255, 221, 0.57));
+}
+
+.btn-carrello {
+  color: white;
+  background-color: rgba(152, 255, 221, 0.837) !important;
+  border: none;
+  /* Rimuove i bordi standard di Bootstrap */
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.icona-carrello {
+  color: #120632;
+  /* Un colore scuro per contrastare con il fondo chiaro della base */
+  translate: 0 -10%;
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-carrello:hover {
+  background-color: rgba(126, 236, 251, 0.837) !important;
+  /* Forza il cambio rispetto all'important sopra */
+  border-color: #b400d4;
+  box-shadow: 0 0 15px #b400d4;
+}
+
+.btn-carrello:hover .icona-carrello {
+  color: #ff00a6d2;
+  /* Ciano Neon: contrasta da dio con lo sfondo magenta del bottone! */
+
+  /* Applica il doppio drop-shadow direttamente all'elemento SVG generato dal componente */
+  filter: drop-shadow(0px 0px 4px #00ffee) drop-shadow(0px 0px 8px rgba(0, 255, 221, 0.57));
+}
+
 /* scroll sections */
 
 .scroll-section {
-  height: 100vh;
+  height: 70vh;
   width: 100%;
   background-color: #000000;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  position: relative;
+  z-index: -0;
   /* O 'cover' a seconda di come vuoi visualizzare il soggetto */
 
   /* Centra il contenuto del main (testi, bottoni, ecc.) senza romperlo */
@@ -123,12 +196,20 @@
   justify-content: center;
 }
 
+.carousel {
+  z-index: 3;
+  padding-top: 16%;
+}
+
 .section-1 {
+  text-align: center;
   background-image: url('/imgs/img_background_glitch/background_img_stars.avif');
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
+  justify-content: start;
+  top: 0;
   /* O l'altezza che preferisci */
 
   /* LA SFUMATURA: Parte visibile (nero opaco) e diventa trasparente al fondo */
@@ -136,24 +217,52 @@
   mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
 }
 
-.landscape-wrapper {
-  position: absolute;
-  translate: 0 40%;
+.sect-1-img-wrapper {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+
+  /* Maschera che sfuma sui 4 lati */
+  -webkit-mask-image: 
+    linear-gradient(to right, transparent, black 15%, black 85%, transparent),
+    linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  
+  mask-image: 
+    linear-gradient(to right, transparent, black 15%, black 85%, transparent),
+    linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+
+  /* Unisce le due sfumature (orizzontale e verticale) */
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+.home-motto {
+  width: 100%;
+  padding-top: 5%;
+  z-index: 2;
+  text-align: center;
 }
 
 .sect-1-p {
-  width: 30%;
+  display: none;
+  width: 80%;
 }
 
 
 .section-2 {
-  margin-top: 100px;
-  background-image: url('/imgs/img_background_glitch/bg_img_lamp.jpg');
-  background-position: right;
-  background-size: contain;
+  background-color: #000000;
+}
 
-  /* Evita che l'immagine si ripeta se lo schermo è troppo grande */
-  background-repeat: no-repeat;
+.sect-2-content-wrapper {
+  display: flex;
+}
+
+.section-2-motto {
+  width: 60%;
+}
+
+.bg-lamp {
+  width: 30%;
 }
 
 .section-3 {
@@ -184,8 +293,8 @@
 .sidebar {
   position: fixed;
   top: 0;
-  right: -300px;
-  width: 300px;
+  right: -100%;
+  width: 100%;
   height: 100%;
   background: #fff;
   transition: 0.3s;
@@ -601,4 +710,149 @@
 /* Effetto di ingrandimento dell'icona all'hover */
 .cyber-action-btn:hover .cyber-icon {
     transform: scale(1.12);
+/*Carrello */
+.cyber-titleShop {
+  color: #00ffff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+
+  text-shadow:
+    0 0 5px #00ffff,
+    0 0 15px #00ffff,
+    0 0 30px #00ffff;
+}
+
+.cyber-glitch-title {
+  color: #111;
+
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  text-shadow:
+    2px 0 #00ffff,
+    -2px 0 #ff00ff;
+}
+
+.cyber-card-item {
+  background: white !important;
+
+
+
+  box-shadow:
+    0 0 10px rgba(0, 255, 255, .15);
+
+  transition: .3s;
+}
+
+.cyber-card-item:hover {
+  transform: translateY(-2px);
+
+  border-color: #ff00ff !important;
+
+  box-shadow:
+    0 0 15px rgba(0, 255, 255, .4),
+    0 0 25px rgba(255, 0, 255, .2);
+}
+
+.cyber-quantity-btn {
+  width: 30px;
+  height: 30px;
+
+  border: 1px solid #00ffff;
+  background: white;
+
+  color: #00bcd4;
+  font-weight: bold;
+
+  transition: .3s;
+}
+
+.cyber-quantity-btn:hover {
+  background: #00ffff;
+  color: black;
+
+  box-shadow:
+    0 0 10px #00ffff,
+    0 0 20px #00ffff;
+}
+
+.cyber-delete-btn {
+  background: transparent;
+  border: 1px solid #ff006a;
+
+  color: #ff006a;
+
+  transition: .3s;
+}
+
+.cyber-delete-btn:hover {
+  background: #ff006a;
+  color: white;
+
+  box-shadow:
+    0 0 10px #ff006a,
+    0 0 20px #ff006a;
+}
+
+.cyber-checkout-btn {
+  background: white;
+
+  border: 2px solid #00ffff;
+  color: #00bcd4;
+
+  font-weight: bold;
+  letter-spacing: 2px;
+
+  padding: 12px;
+
+  transition: .3s;
+}
+
+.cyber-checkout-btn:hover {
+  background: #00ffff;
+  color: black;
+
+  box-shadow:
+    0 0 15px #00ffff,
+    0 0 30px #00ffff;
+}
+
+.cyber-reset-btn {
+  background: transparent;
+  border: none;
+
+  color: #ff006a;
+  font-weight: bold;
+
+  transition: .3s;
+}
+
+.cyber-reset-btn:hover {
+  text-shadow:
+    0 0 10px #ff006a,
+    0 0 20px #ff006a;
+}
+
+.cart-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  }
+
+@media screen and (min-width: 420px) {
+  .sidebar {
+    right: -350px;
+    width: 350px;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .sect-1-p {
+  display: initial;
+  z-index: 3;
+}
+
+  .home-motto {
+    width: 80%;
+  }
 }
