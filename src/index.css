@@ -328,7 +328,7 @@
   z-index: 1000;
   padding: 20px;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-  background-image: linear-gradient(to bottom, rgba(194, 246, 253, 0.922), rgba(144, 233, 255, 0.297));
+  background-image: linear-gradient(to bottom, rgba(194, 246, 253, 0.964), rgba(144, 233, 255, 0.297));
   /*
   background: linear-gradient(135deg,
       rgba(5, 8, 22, 0.85),
@@ -456,7 +456,7 @@
 .explore-btn {
   align-self: flex-end;
   /* Spinge il bottone a destra se la card è flex */
-  width: 20%;
+  width: auto;
   color: white;
   background-color: rgba(152, 255, 221, 0.837) !important;
   border: none;
@@ -954,10 +954,20 @@
 
 .btn-outline-info {
   height: 40px;
+  transition: all 0.4s ease-in-out;
 }
 
 .btn-outline-info svg {
   translate: 0 -10%;
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-outline-info:hover svg {
+  color: #ffffffd2;
+  /* Ciano Neon: contrasta da dio con lo sfondo magenta del bottone! */
+
+  /* Applica il doppio drop-shadow direttamente all'elemento SVG generato dal componente */
+  filter: drop-shadow(0px 0px 4px #fff4a1) drop-shadow(0px 0px 8px rgba(255, 230, 142, 0.57));
 }
 
 .qty-btn {
@@ -998,6 +1008,23 @@
   text-align: center;
 }
 
+.trash-box {
+  border: 1px solid rgb(0, 240, 255);
+  color: rgb(0, 240, 255);
+  background-color: #00000000;
+  border-radius: 8px;
+  padding: 4px 12px;
+}
+
+.trash-box svg {
+  transition: all 0.3s ease-in-out;
+}
+
+.trash-box:hover svg {
+  color: #ff0066e9;
+  filter: drop-shadow(0px 0px 4px #00ffee) drop-shadow(0px 0px 8px rgba(0, 255, 221, 0.57));
+}
+
 @media screen and (min-width: 420px) {
   .sidebar {
     right: -350px;
@@ -1012,10 +1039,3 @@
   }
 }
 
-.trash-box {
-  border: 1px solid rgb(0, 240, 255);
-  color: rgb(0, 240, 255);
-  background-color: #00000000;
-  border-radius: 8px;
-  padding: 4px 12px;
-}
