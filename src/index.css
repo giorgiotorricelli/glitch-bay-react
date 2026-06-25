@@ -857,3 +857,36 @@
     width: 80%;
   }
 }
+
+.tracking-wider {
+    letter-spacing: 2px;
+}
+
+.btn-distopic-cta {
+    display: inline-block;
+    padding: 12px 32px;
+    font-family: 'title-font', sans-serif;
+    font-size: 1.1rem;
+    color: #00ffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border: 1px solid #00ffff31;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    position: relative;
+    clip-path: polygon(0 0, 95% 0, 100% 30%, 100% 100%, 5% 100%, 0 70%);
+}
+
+.btn-distopic-cta:hover {
+    color: #000;
+    background: #00ffffd5;
+    border-color: #00ffff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-distopic-cta:active {
+    transform: translateY(1px);
+}
