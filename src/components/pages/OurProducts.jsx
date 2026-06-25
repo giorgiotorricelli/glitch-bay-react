@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ProductList from "../ProductList";
 import { fetchAll, fetchCategories } from "../../utils/fetch";
 import { ArrowDown, ArrowUp, Grid3x3Gap, ListUl } from "react-bootstrap-icons";
+//nada
 
 function OurProducts() {
     const [products, setProducts] = useState([]);
