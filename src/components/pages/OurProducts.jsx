@@ -3,6 +3,7 @@ import ProductList from "../ProductList";
 import { fetchAll, fetchCategories } from "../../utils/fetch";
 import BtnScrollUp from "../BtnScrollUp";
 import { ArrowDown, ArrowUp, Grid3x3Gap, ListUl } from "react-bootstrap-icons";
+//nada
 
 function OurProducts() {
     const [products, setProducts] = useState([]);
