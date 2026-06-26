@@ -37,7 +37,7 @@ function Layout() {
                         >
                             <HeartFill className='cuore-preferiti' /> Preferiti
                             {totalWish > 0 && (
-                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-magenta" style={{ backgroundColor: '#ff007f' }}>
+                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                     {totalWish}
                                 </span>
                             )}
