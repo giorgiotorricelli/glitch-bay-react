@@ -120,6 +120,7 @@
   border: none;
   /* Rimuove i bordi standard di Bootstrap */
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  transform: scale(0.7);
   transition: all 0.3s ease-in-out;
 }
 
@@ -153,6 +154,7 @@
   border: none;
   /* Rimuove i bordi standard di Bootstrap */
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  transform: scale(0.7);
   transition: all 0.3s ease-in-out;
 }
 
@@ -1030,12 +1032,31 @@
     right: -350px;
     width: 350px;
   }
+
+  .nav-icons-mobile {
+    transform: scale(1);
+  }
 }
 
 @media screen and (min-width: 576px) {
   .sect-1-p {
     display: initial;
     z-index: 3;
+  }
+
+  .nav-icons-mobile {
+    transform: scale(1.2);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .sect-1-p {
+    display: initial;
+    z-index: 3;
+  }
+
+  .nav-icons-mobile {
+    transform: scale(1.2);
   }
 }
 
