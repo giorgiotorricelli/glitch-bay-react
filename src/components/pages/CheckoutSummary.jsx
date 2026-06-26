@@ -99,7 +99,8 @@ function CheckoutSummary() {
                 });
             } else {
                 const errorData = await response.json();
-                alert(`Errore: ${errorData.error}`);
+                console.log(errorData)
+                alert(`Errore nell'esecuzione della richiesta riprova piú tardi`);
             }
         } catch (error) {
             console.error("Errore di rete:", error);
