@@ -39,9 +39,9 @@ function ProductCard({ product, displayed, viewMode }) {
                 <div className="price-wrapper p-font mt-auto mb-2 d-flex justify-content-center align-items-center">
                     {hasDiscount ? (
                         <div className="price-box">
-                            <h5 className="text-decoration-line-through cut-price">
+                            <h6 className="text-decoration-line-through cut-price">
                                 {product.price}€
-                            </h5>
+                            </h6>
                             <h3 className="">{product.discounted_price}€</h3>
                         </div>
                     ) : (

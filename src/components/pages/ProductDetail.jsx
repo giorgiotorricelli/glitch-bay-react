@@ -9,9 +9,9 @@ function ProductDetail() {
     const [product, setProduct] = useState([]);
     const { slug } = useParams();
     const { cart,
-            addToCart,
-            increaseQuantity,
-            decreaseQuantity } = useCart();
+        addToCart,
+        increaseQuantity,
+        decreaseQuantity } = useCart();
 
     const cartItem = cart.find(
         (item) => item.slug === product.slug
@@ -37,11 +37,27 @@ function ProductDetail() {
             <div className="cyber-detail-card">
                 <div className="row align-items-center">
                     <div className="col-lg-6 text-center">
-                        <img
-                            src={product.img}
-                            alt={product.name}
-                            className="img-fluid cyber-img"
-                        />
+                        <div
+                            className="amazon-lens-container"
+                            onMouseMove={(e) => {
+                                const container = e.currentTarget;
+                                const { left, top, width, height } = container.getBoundingClientRect();
+                                const x = ((e.clientX - left) / width) * 100;
+                                const y = ((e.clientY - top) / height) * 100;
+                                container.style.setProperty('--zoom-x', `${x}%`);
+                                container.style.setProperty('--zoom-y', `${y}%`);
+                            }}
+                        >
+                            <img
+                                src={product.img}
+                                alt={product.name}
+                                className="img-fluid cyber-img"
+                            />
+                            <div
+                                className="amazon-lens"
+                                style={{ backgroundImage: `url(${product.img})` }}
+                            />
+                        </div>
                     </div>
                     <div className="col-lg-6">
                         <h1 className="cyber-title detail-font">
@@ -67,39 +83,39 @@ function ProductDetail() {
                         <div className="d-flex align-items-center justify-content-start gap-2">
 
 
-                                {cartItem ? (
-                                    <div
-                                        className="d-flex align-items-center flex-grow-0 cyber-qty-box "
-                                        style={{
-                                            border: '1px solid #00f0ff',
-                                            borderRadius: '8px',
-                                            padding: '4px 8px'
-                                        }}
+                            {cartItem ? (
+                                <div
+                                    className="d-flex align-items-center flex-grow-0 cyber-qty-box "
+                                    style={{
+                                        border: '1px solid #00f0ff',
+                                        borderRadius: '8px',
+                                        padding: '4px 8px'
+                                    }}
+                                >
+
+                                    <span className="fw-bold p-font qty-display">
+                                        {cartItem.quantity}
+                                    </span>
+
+                                    <button
+                                        className="btn qty-btn d-flex align-items-center justify-content-center p-0 fw-bold me-2"
+                                        onClick={() => decreaseQuantity(product.slug)}
                                     >
-
-                                        <span className="fw-bold p-font qty-display">
-                                            {cartItem.quantity}
-                                        </span>
-
-                                        <button
-                                            className="btn qty-btn d-flex align-items-center justify-content-center p-0 fw-bold me-2"
-                                            onClick={() => decreaseQuantity(product.slug)}
-                                        >
-                                            <DashCircle />
-                                        </button>
-
-                                        <button
-                                            className="btn qty-btn d-flex align-items-center justify-content-center p-0 fw-bold"
-                                            onClick={() => increaseQuantity(product.slug)}
-                                        >
-                                            <PlusCircle />
-                                        </button>
-                                    </div>
-                                ) : (
-                                    <button className="cyber-action-btn" onClick={handleAddToCart}>
-                                        <Cart3 className="cyber-icon" size={17} />
+                                        <DashCircle />
                                     </button>
-                                )}
+
+                                    <button
+                                        className="btn qty-btn d-flex align-items-center justify-content-center p-0 fw-bold"
+                                        onClick={() => increaseQuantity(product.slug)}
+                                    >
+                                        <PlusCircle />
+                                    </button>
+                                </div>
+                            ) : (
+                                <button className="cyber-action-btn" onClick={handleAddToCart}>
+                                    <Cart3 className="cyber-icon" size={17} />
+                                </button>
+                            )}
                             <button
                                 className={`cyber-action-btn ${isAdded ? 'active-heart' : ''}`}
                                 onClick={(e) => {
