@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Heart, HeartFill, PlusCircle, DashCircle, Cart3, Trash } from "react-bootstrap-icons";
 import { useCart } from "../context/CartContext.jsx";
-import { useWishlist } from "../context/WishlistContext.jsx"; // Nuovo import
+import { useWishlist } from "../context/WishlistContext.jsx";
 
 function ProductCard({ product, displayed, viewMode }) {
     const isList = viewMode === 'list';
@@ -12,7 +12,7 @@ function ProductCard({ product, displayed, viewMode }) {
         decreaseQuantity,
         removeFromCart
     } = useCart();
-    const { wishList, setWishList, addWishHandler } = useWishlist(); // Estraiamo le funzioni della wishlist
+    const { wishList, setWishList, addWishHandler } = useWishlist();
     const isAdded = Array.isArray(wishList) && wishList.some((item) => item.slug === product.slug);
 
     const cartItem = cart.find(
@@ -49,7 +49,6 @@ function ProductCard({ product, displayed, viewMode }) {
                         <h5 className="card-title p-font prod-name-wrapper mb-0 text-center text-white">{product.name}</h5>
 
                         {isList && product.category && (
-                            /* Sostituito bg-secondary con uno sfondo personalizzato rgba semitrasparente */
                             <span className="badge text-uppercase p-font"
                                 style={{
                                     fontSize: '0.75rem',
