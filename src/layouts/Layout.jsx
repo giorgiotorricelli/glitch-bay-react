@@ -1,11 +1,14 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useCart } from '../context/CartContext.jsx';
 import { useWishlist } from '../context/WishlistContext.jsx'; // Nuovo import
 import { HeartFill, Cart3 } from 'react-bootstrap-icons';
 import { Trash } from "react-bootstrap-icons";
+import { FaBoxOpen } from 'react-icons/fa';
+import { IoHome } from "react-icons/io5";
 
 function Layout() {
+    const location = useLocation();
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [isWishlistOpen, setIsWishlistOpen] = useState(false); // Stato per la seconda sidebar
 
@@ -34,7 +37,7 @@ function Layout() {
                         >
                             <HeartFill className='cuore-preferiti' /> Preferiti
                             {totalWish > 0 && (
-                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-magenta" style={{ backgroundColor: '#ff007f' }}>
+                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                     {totalWish}
                                 </span>
                             )}
@@ -55,7 +58,9 @@ function Layout() {
                     </div>
 
                     {/* Controlli Mobile */}
-                    <div className="d-lg-none d-flex gap-2">
+                    <div className="nav-icons-mobile d-lg-none d-flex gap-md-2">
+                        <Link to="/" className=" cyber-link text-white text-decoration-none fw-bold d-lg-none"><IoHome/></Link>    
+                        <Link to="/products" className=" cyber-link text-white text-decoration-none fw-bold d-lg-none"><FaBoxOpen/></Link>
                         {/* Bottone Preferiti */}
                         <button className="btn btn-sm btn-preferiti position-relative px-3" onClick={() => setIsWishlistOpen(true)}>
                             <HeartFill className='cuore-preferiti' />
@@ -175,8 +180,6 @@ function Layout() {
                                             className="btn btn-outline-danger btn-sm w-100"
                                             onClick={() => addWishHandler(item)}
                                         >
-
-                                            Rimuovi
                                             <Trash size={16} className="me-2" />
                                         </button>
                                     </div>
