@@ -26,7 +26,8 @@ function OurProducts() {
     const orderOptions = [
         { label: 'Nome', value: 'name' }, 
         { label: 'Prezzo', value: 'price' }, 
-        { label: 'Data', value: 'created_at' }
+        { label: 'Data', value: 'created_at' },
+        { label: 'Sconto', value: 'discount' }
     ];
 
 
@@ -132,7 +133,7 @@ function OurProducts() {
                     </div>
 
                     {/* SELECT & BUTTON ORDER */}
-                    <div className="col-6 col-md-3 d-grid gap-2">
+                    <div className="col-6 col-md-3 d-grid gap-2 d-flex">
                         <select
                             value={selectedOrder}
                             onChange={(e) => {
@@ -163,7 +164,7 @@ function OurProducts() {
                             <button
                                 type="button"
                                 onClick={() => updateSearchParams("direction", direction ? "DESC" : "ASC")}
-                                className={`btn p-font ${direction ? 'btn-warning' : 'btn-outline-light'}`}
+                                className={`btn  p-font ${direction ? 'btn-warning' : 'btn-outline-light'}`}
                             >
                                 {direction ? <ArrowDown /> : <ArrowUp />}
                             </button>
