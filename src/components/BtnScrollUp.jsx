@@ -12,8 +12,15 @@ function BtnScrollUp() {
                 setIsVisible(false);
             }
         };
-        window.addEventListener('scroll', toggleVisibility)
-    })
+
+        toggleVisibility();
+
+        window.addEventListener('scroll', toggleVisibility);
+
+        return () => {
+            window.removeEventListener('scroll', toggleVisibility);
+        };
+    }, []);
 
     const scrollToTop = () => {
         window.scrollTo({

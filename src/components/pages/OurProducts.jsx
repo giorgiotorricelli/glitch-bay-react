@@ -9,9 +9,9 @@ import { ArrowDown, ArrowUp, Grid3x3Gap, ListUl } from "react-bootstrap-icons";
 function OurProducts() {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
-
     const [searchParams, setSearchParams] = useSearchParams();
     const [viewMode, setViewMode] = useState('grid');
+    const [windowSize, setWindowSize] = useState(window.innerWidth);
 
 
     const searchQuery = searchParams.get("search") || "";
@@ -40,6 +40,24 @@ function OurProducts() {
         }
         setSearchParams(newParams);
     };
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setViewMode('grid');
+            }
+            setWindowSize(window.innerWidth);
+        };
+
+        handleResize();
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+        
+    }, []);
 
     useEffect(() => {
         const getCategories = async () => {
@@ -170,7 +188,7 @@ function OurProducts() {
                             </button>
                         )}
                     </div>
-                    <div className="col-12 col-md-2 d-flex justify-content-md-end justify-content-center">
+                    {windowSize >= 768 && (<div className="col-12 col-md-2 justify-content-md-end justify-content-center d-flex">
                         <div className="btn-group" role="group" aria-label="Visualizzazione prodotti">
                             <button
                                 type="button"
@@ -189,7 +207,7 @@ function OurProducts() {
                                 <ListUl />
                             </button>
                         </div>
-                    </div>
+                    </div>)}
                 </section>
 
                 {products && products.length > 0 ? (

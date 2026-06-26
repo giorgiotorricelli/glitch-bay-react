@@ -69,7 +69,7 @@ function ProductCard({ product, displayed, viewMode }) {
                         </p>
                     )}
 
-                    <div className={`price-wrapper p-font d-flex align-items-center justify-content-center w-100 ${isList ? 'mt-1' : 'mt-auto mb-2'}`}>
+                    <div className={`price-wrapper p-font d-flex align-items-center justify-content-center w-100 ${isList ? 'mt-1' : ''}`}>
                         {hasDiscount ? (
                             <div className="price-box d-flex align-items-center gap-2">
                                 <h5 className="text-decoration-line-through cut-price mb-0" style={isList ? { fontSize: '1rem' } : {}}>
@@ -85,7 +85,7 @@ function ProductCard({ product, displayed, viewMode }) {
             </Link>
 
             <div
-                className={`card-actions d-flex gap-2 align-items-center justify-content-end ${isList ? 'col-2 p-0' : 'px-3 pb-3 mt-auto'
+                className={`card-actions d-flex gap-2 align-items-center ${isList ? 'col-2 p-0 justify-content-end align-self-end' : ' mt-auto'
                     }`}>
                 {displayed !== 'product-detail' && (
                     /* Pulsante Cuore con Toggle e classe condizionale per l'animazione neon */
