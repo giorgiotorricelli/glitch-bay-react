@@ -92,9 +92,9 @@ function Layout() {
                     <button className="close-btn" onClick={() => setIsCartOpen(false)}>×</button>
                 </div>
                 <div className="cart-section p-font">
-                    <h5 className="text-dark mb-3">I tuoi Hardware:</h5>
+                    <h5 className="text-dark mb-3">I tuoi Prodotti:</h5>
                     {cart.length === 0 ? (
-                        <p className="text-muted small">Nessun pacchetto rilevato nel sistema...</p>
+                        <p className="text-muted small">OH no! Non ci sono prodotti nel tuo carello.</p>
                     ) : (
                         <>
                             <div className="cart-items" style={{ maxHeight: "95vh", overflowY: "auto" }}>
@@ -103,7 +103,7 @@ function Layout() {
                                         <div className="d-flex justify-content-between align-items-center flex-wrap text-dark">
                                             <div style={{ maxWidth: '70%' }}>
                                                 <div className="fw-bold text-truncate small">{item.name}</div>
-                                                <div className="small text-muted">{item.quantity}x - €{item.price}</div>
+                                                <div className="small text-muted">{item.quantity}x - €{item.price.toFixed(2).replace('.',',')}</div>
                                             </div>
 
 
@@ -127,7 +127,7 @@ function Layout() {
                             <Link to="checkout">
                                 <button className="cyber-checkout-btn w-100 mb-2 ">VAI AL PAGAMENTO</button>
                             </Link>
-                            <button className="cyber-reset-btn w-100 w-100 " onClick={clearCart}>Resetta Carrello</button>
+                            <button className="cyber-reset-btn w-100 w-100 " onClick={clearCart}>Svuota Carrello</button>
                         </>
                     )}
                 </div>
@@ -142,7 +142,7 @@ function Layout() {
                 <div className="wishlist-section p-font">
 
                     {wishList.length === 0 ? (
-                        <p className="text-muted small">Nessun codice salvato nei preferiti...</p>
+                        <p className="text-muted small">Non ci sono prodotti nella tua lista Preferiti</p>
                     ) : (
                         <div className="wishlist-items" style={{ maxHeight: "70vh", overflowY: "auto" }}>
                             {wishList.map((item) => (

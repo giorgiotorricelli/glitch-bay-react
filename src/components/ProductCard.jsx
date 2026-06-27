@@ -73,12 +73,12 @@ function ProductCard({ product, displayed, viewMode }) {
                         {hasDiscount ? (
                             <div className="price-box d-flex align-items-center gap-2">
                                 <h5 className="text-decoration-line-through cut-price mb-0" style={isList ? { fontSize: '1rem' } : {}}>
-                                    {product.price}€
+                                    {product.price.toFixed(2).replace('.',',')}€
                                 </h5>
-                                <h3 className="mb-0" style={isList ? { fontSize: '1.4rem' } : {}}>{product.discounted_price}€</h3>
+                                <h3 className="mb-0" style={isList ? { fontSize: '1.4rem' } : {}}>{product.discounted_price.toFixed(2).replace('.',',')}€</h3>
                             </div>
                         ) : (
-                            <h3 className="mb-0" style={isList ? { fontSize: '1.4rem' } : {}}>{product.price}€</h3>
+                            <h3 className="mb-0" style={isList ? { fontSize: '1.4rem' } : {}}>{product.price.toFixed(2).replace('.',',')}€</h3>
                         )}
                     </div>
                 </div>

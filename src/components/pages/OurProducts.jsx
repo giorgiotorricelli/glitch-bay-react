@@ -17,17 +17,15 @@ function OurProducts() {
     const searchQuery = searchParams.get("search") || "";
     const selectedCategoryName = searchParams.get("category") || "";
     const selectedOrder = searchParams.get("order") || "";
-    const directionParam = searchParams.get("direction") || "DESC"; 
+    const directionParam = searchParams.get("direction") || "DESC";
     const direction = directionParam === "ASC";
 
-    console.log(categories);
-    
+
 
     const orderOptions = [
-        { label: 'Nome', value: 'name' }, 
-        { label: 'Prezzo', value: 'price' }, 
+        { label: 'Nome', value: 'name' },
+        { label: 'Prezzo', value: 'price' },
         { label: 'Data', value: 'created_at' },
-        { label: 'Sconto', value: 'discount' }
     ];
 
 
@@ -56,7 +54,7 @@ function OurProducts() {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-        
+
     }, []);
 
     useEffect(() => {
@@ -73,38 +71,46 @@ function OurProducts() {
         const fetchFilteredProducts = async () => {
             const params = new URLSearchParams();
             const searchedString = searchParams.get('search') || '';
-            if (searchedString.trim() !== ''){
+            const discountFilter = searchParams.get('filter') || '';
+
+            if (searchedString.trim() !== '') {
                 params.append('search', searchedString.trim());
             }
-            if(selectedCategoryName !== "" && categories.length > 0){
+
+            if (discountFilter === 'discount') {
+                params.append('filter', 'discount');
+            }
+            else if (selectedCategoryName !== "" && categories.length > 0) {
                 const foundCategory = categories.find(category => {
                     return category.name.toLowerCase() === selectedCategoryName.toLowerCase()
                 })
-                if (foundCategory){
+                if (foundCategory) {
                     params.append('category', foundCategory.id);
                 }
             }
-            if (selectedOrder !== ''){
+
+            if (selectedOrder !== '') {
                 params.append('order', selectedOrder);
                 params.append('direction', direction ? 'ASC' : 'DESC');
             }
 
             const queryString = params.toString();
             const url = `http://localhost:3000/products${queryString ? `?${queryString}` : ""}`;
-            try{
+            try {
                 const result = await fetch(url);
-                if(!result.ok){
+                if (!result.ok) {
                     throw new Error(`Errore HTTP! Stato: ${result.status}`)
                 }
                 const data = await result.json();
                 const finalProductsList = data.result;
                 setProducts(finalProductsList ?? []);
-            }catch(error){
+            } catch (error) {
                 console.error("Errore nel recupero prodotti filtrati:", error);
                 setProducts([]);
             }
         }
-        if (categories.length > 0 || selectedCategoryName === ''){
+
+        if (categories.length > 0 || selectedCategoryName === '' || searchParams.get('filter') === 'discount') {
             fetchFilteredProducts();
         }
 
@@ -113,11 +119,11 @@ function OurProducts() {
     return (
         <div className="products-page">
             <div className="md-2 ms-md-4">
-                <BtnScrollUp/>
+                <BtnScrollUp />
             </div>
-            
+
             <main className="products-main container py-5">
-                
+
                 <section className="row g-3 justify-content-center mb-5 cyber-controls-bar align-items-center">
 
                     {/* SEARCH */}
@@ -134,14 +140,30 @@ function OurProducts() {
                         </div>
                     </div>
 
-                    {/* SELECT CATEGORIES */}
+                    {/* SELECT PER FILTRARE */}
                     <div className="col-6 col-md-4">
                         <select
-                            value={selectedCategoryName}
-                            onChange={(e) => updateSearchParams("category", e.target.value)}
-                            className="form-select cyber-select p-font"
-                        >
-                            <option value="">Tutte le categorie</option>
+                            value={searchParams.get("filter") === "discount" ? "discount" : selectedCategoryName}
+                            onChange={(e) => {
+                                const val = e.target.value;
+                                const newParams = new URLSearchParams(searchParams);
+
+                                if (val === "discount") {
+                                    newParams.set("filter", "discount");
+                                    newParams.delete("category");
+                                } else {
+                                    newParams.delete("filter");
+                                    if (val) {
+                                        newParams.set("category", val);
+                                    } else {
+                                        newParams.delete("category");
+                                    }
+                                }
+                                setSearchParams(newParams);
+                            }}
+                            className="form-select cyber-select p-font">
+                            <option value="">Filtra per</option>
+                            <option value="discount">In Sconto</option>
                             {categories.map((cat) => (
                                 <option key={cat.id} value={cat.name}>
                                     {cat.name}
@@ -168,8 +190,7 @@ function OurProducts() {
                                 }
                                 setSearchParams(newParams);
                             }}
-                            className="form-select cyber-select p-font"
-                        >
+                            className="form-select cyber-select p-font">
                             <option value="">Ordina Per</option>
                             {orderOptions.map((opt) => (
                                 <option key={opt.value} value={opt.value} className="text-capitalize">
@@ -177,7 +198,7 @@ function OurProducts() {
                                 </option>
                             ))}
                         </select>
-                        
+
                         {selectedOrder && (
                             <button
                                 type="button"
@@ -211,7 +232,7 @@ function OurProducts() {
                 </section>
 
                 {products && products.length > 0 ? (
-                    <ProductList products={products} displayed={'product-page'} viewMode={viewMode}/>
+                    <ProductList products={products} displayed={'product-page'} viewMode={viewMode} />
                 ) : (
                     <div className="text-center text-white py-5">
                         <p className="fs-4 p-font">Nessun prodotto trovato</p>
