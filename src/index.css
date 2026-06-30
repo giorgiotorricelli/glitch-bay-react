@@ -59,6 +59,8 @@
   padding-right: 10px;
 }
 
+/* LAYOUT */
+
 /*Layout header*/
 .cyber-nav {
   align-items: center;
@@ -73,6 +75,83 @@
   text-decoration: none;
   transition: all 0.3s ease;
   padding: 6px 10px;
+}
+
+.chatbot-wrapper {
+  position: fixed;
+  width: 40%;
+  height: 40%;
+  z-index: 15;
+  bottom: 10%;
+  left: 10px;
+}
+
+.cyber-fox-wrapper {
+  border: 2px solid blueviolet;
+  border-radius: 50%;
+  position: fixed;
+  aspect-ratio: 1;
+  z-index: 15;
+  bottom: 4%;
+  left: 10px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  cursor: pointer;
+  transition: translate 0.2s ease;
+}
+
+.cyber-fox-wrapper:hover {
+  translate: 0 -3px;
+}
+
+/* Modifica leggermente il calcolo dell'altezza per fare spazio al nuovo header */
+.chat-messages-area {
+  max-height: calc(100% - 95px);
+}
+
+/* Stile per il pulsante di chiusura (X) */
+.btn-close-chat {
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* Effetto Hover sulla X (cambia colore in rosso/rosa cyberpunk e si ingrandisce leggermente) */
+.btn-close-chat:hover {
+  color: #ff0055 !important;
+  transform: scale(1.1);
+}
+
+/* Regole precedenti ereditate */
+.chat-bubble {
+  max-width: 75%;
+}
+
+.chat-bubble-user {
+  border-bottom-right-radius: 0px !important;
+}
+
+.chat-bubble-bot {
+  border-bottom-left-radius: 0px !important;
+}
+
+.chat-author {
+  font-size: 0.75rem;
+}
+
+.chat-messages-area::-webkit-scrollbar {
+  width: 5px;
+}
+
+.chat-messages-area::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.chat-messages-area::-webkit-scrollbar-thumb {
+  background: #00f0ff;
+  border-radius: 4px;
 }
 
 /* LINEA NEON SOTTO */

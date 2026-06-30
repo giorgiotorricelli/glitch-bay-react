@@ -6,6 +6,7 @@ import { HeartFill, Cart3 } from 'react-bootstrap-icons';
 import { Trash, DashCircle, PlusCircle } from "react-bootstrap-icons";
 import { FaBoxOpen } from 'react-icons/fa';
 import { IoHome } from "react-icons/io5";
+import Chatbot from '../components/Chatbot.jsx';
 
 function Layout() {
     const location = useLocation();
@@ -222,6 +223,9 @@ function Layout() {
             </nav >
 
             <main>
+                
+                    <Chatbot/>
+                
                 <Outlet />
             </main>
         </div >
