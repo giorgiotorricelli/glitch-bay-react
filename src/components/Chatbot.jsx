@@ -46,7 +46,7 @@ function Chatbot() {
             
             {/* NUOVO: Header del Chatbot con la X di chiusura */}
             <div className="chat-header d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom border-secondary">
-                <span className="fw-bold p-font text-info">Cyber Assistant</span>
+                <span className="fw-bold p-font text-info">Cyber Fox</span>
                 <button 
                     type="button" 
                     className="btn-close-chat bg-transparent border-0 text-secondary p-0"
@@ -71,16 +71,16 @@ function Chatbot() {
                                     : 'bg-dark text-light border border-secondary chat-bubble-bot'
                             }`}>
                                 <div className="chat-author mb-1 opacity-75">
-                                    {isUser ? 'Tu' : 'Claude'}
+                                    {isUser ? 'Tu' : 'Fox'}
                                 </div>
                                 <p className="mb-0 p-font">{textToShow}</p>
                             </div>
 
                             {msg.text.products && msg.text.products.length > 0 && (
-                                <div className="row g-2 w-100 mt-2 justify-content-start">
+                                <div className="row g-2 w-100 mt-2 justify-content-start mb-2">
                                     {msg.text.products.map(product => (
-                                        <div key={product.slug} className="col-12 col-md-6">
-                                            <ChatCard product={product} />
+                                        <div key={product.slug} className="col-12">
+                                            <ChatCard product={product} clickHandler={handleOnClose} />
                                         </div>
                                     ))}
                                 </div>
@@ -92,7 +92,7 @@ function Chatbot() {
                 {loading && (
                     <div className="d-flex align-items-center gap-2 text-info small p-font">
                         <div className="spinner-border spinner-border-sm" role="status"></div>
-                        <span>Claude sta elaborando...</span>
+                        <span>Sto elaborando...</span>
                     </div>
                 )}
             </div>

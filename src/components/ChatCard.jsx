@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom"
 
-function ChatCard({product}) {
+function ChatCard({product, clickHandler}) {
   const displayPrice =  product.price.replace('.', ',');
 
     return (
         <Link
             to={`/products/${product.slug}`}
-            className="cyber-card w-50 d-flex m-3 flex-column justify-content-between text-decoration-none text-white h-100 p-0"
+            className="cyber-card-chat w-75 d-flex m-3 flex-column justify-content-between text-decoration-none text-white h-100 p-0"
             style={{ display: 'block' }}
+            onClick={clickHandler}
         >
             <div className="card-body d-flex flex-column p-3 w-100">
 

@@ -30,7 +30,7 @@ function BtnScrollUp() {
     };
 
     return (
-        isVisible ? (<div className="btn-scroll-wrapper position-fixed d-flex">
+        isVisible ? (<div className="btn-scroll-wrapper position-fixed d-flex justify-content-end">
                         <ArrowUpCircle className="btn-scroll-up align-self-end" size={50} onClick={scrollToTop} />
                     </div>)
                     : null
