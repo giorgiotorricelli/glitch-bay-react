@@ -2,7 +2,10 @@ import { Link } from "react-router-dom";
 
 function NotFound() {
     return (
-        <div className="products-page min-vh-100 d-flex align-items-center py-5">
+        <div className="products-page vh-100 d-flex align-items-center py-5">
+            <div className="position-absolute h-100 w-100">
+                <img src="/imgs/img_elements_glitch/girl.png" alt="girl-with-phone" className="girl-with-phone"/>
+            </div>
             <div className="container text-center p-font">
                 
                 <div className="mb-4">

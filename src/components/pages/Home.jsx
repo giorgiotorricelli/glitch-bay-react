@@ -46,13 +46,18 @@ function Home() {
                 </div>
             </div>
 
-            <div className="container-xs">
+            <div className="container-xs position-relative">
+
                 <ProductsCarousel
                     title="Più Venduti"
                     items={topFive || []}
                     loading={loading}
                     error={error}
                 />
+                
+                <div className="position-absolute">
+                    <img src="/imgs/img_background_glitch/bg_img_lamp.jpg" alt="bg-lamp" className="img-fluid" />
+                </div>
                 <ProductsCarousel
                     title="Ultimi Arrivi"
                     items={latest || []}
@@ -70,18 +75,22 @@ function Home() {
             <div className="scroll-section section-1 position-absolute">
 
             </div>
-            <div className="scroll-section section-2">
-                <div className="sect-2-content-wrapper">
+            <div className="scroll-section section-2 pt-4">
+                <div className="sect-2-content-wrapper justify-content-center">
                     <div className="section-2-motto">
-
+                        <h1 className="title-font">IL TUO NAVIGATORE NELLA RETE</h1>
+                        <p className="p-font">Non perdere tempo a scorrere infiniti cataloghi. Chatta in tempo 
+                        reale con la nostra intelligenza artificiale integrata: chiedi 
+                        quello che cerchi, filtra per categoria e ricevi all'istante 
+                        schede prodotto personalizzate direttamente nella tua console.
+                         Il futuro dello shopping digitale è qui, ed è guidato dai dati.</p>
                     </div>
                     <div className="bg-lamp">
-                        <img src="/imgs/img_background_glitch/bg_img_lamp.jpg" alt="bg-lamp" className="img-fluid" />
+                        <img src="/imgs/img_background_glitch/bg_img_moon.jpg" alt="bg-moon" className="img-fluid" />
                     </div>
                 </div>
 
             </div>
-            <div className="scroll-section section-3"></div>
 
 
         </main>

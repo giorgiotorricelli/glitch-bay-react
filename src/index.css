@@ -186,6 +186,13 @@
   border-radius: 4px;
 }
 
+/* NOT FOUND */
+
+.girl-with-phone {
+  width: 20%;
+  translate: 50px 0;
+}
+
 /* LINEA NEON SOTTO */
 .cyber-link::after {
   content: "";
