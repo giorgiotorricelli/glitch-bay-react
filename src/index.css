@@ -635,13 +635,9 @@
   object-fit: contain;
   transition: .3s;
   border-radius: 30px;
-  cursor: pointer;
   padding: 20px
 }
 
-.cyber-img:hover {
-  transform: scale(1.05);
-}
 
 .cyber-title {
   color: #00ffff;
@@ -1221,7 +1217,7 @@
   border-radius: 30px;
   display: inline-block;
   width: 100%;
-  cursor: crosshair;
+  cursor: zoom-in;
 }
 
 .amazon-lens-container .cyber-img {
@@ -1249,12 +1245,17 @@
 }
 
 
-.amazon-lens-container:hover .amazon-lens {
+.amazon-lens-container.is-zooming .amazon-lens {
   opacity: 1;
+  cursor: zoom-out
 }
 
-.amazon-lens-container:hover .cyber-img {
+.amazon-lens-container.is-zooming .cyber-img {
   opacity: 0;
+}
+
+.amazon-lens-container.is-zooming {
+  cursor: zoom-out; /* ◄ Lente con il meno (-) */
 }
 
 
