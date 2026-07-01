@@ -48,6 +48,10 @@ function Home() {
 
             <div className="container-xs position-relative">
 
+                <div className="padrian-wrapper position-absolute w-100 h-25">
+                    <img src="\imgs\img_background_glitch\padrian.jpg" alt="bg-lamp" className="img-fluid" />
+                </div>
+
                 <ProductsCarousel
                     title="Più Venduti"
                     items={topFive || []}
