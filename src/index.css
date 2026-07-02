@@ -42,7 +42,43 @@
   overflow-x: hidden;
 }
 
+.neon-png-container {
+  display: inline-block;
+  background: #000000; /* Sfondo scuro per far risaltare il neon */
+  padding: 20px;
+}
 
+.neon-image {
+  
+  /* Applichiamo più livelli di drop-shadow per creare l'effetto Neon intenso */
+  /* L'animazione cambierà i colori e l'intensità all'infinito */
+  animation: neonFluido 3s ease-in-out infinite alternate;
+}
+
+/* Animazione che simula il movimento e il flusso della luce neon lungo la silhouette */
+@keyframes neonFluido {
+  0% {
+    filter: 
+      drop-shadow(0 0 4px #00f2fe)
+      drop-shadow(0 0 10px #00f2fe)
+      drop-shadow(0 0 20px #4facfe)
+      contrast(110%);
+  }
+  50% {
+    filter: 
+      drop-shadow(0 0 6px #00f2fe)
+      drop-shadow(0 0 15px #4facfe)
+      drop-shadow(0 0 30px #00f2fe)
+      contrast(130%);
+  }
+  100% {
+    filter: 
+      drop-shadow(0 0 4px #4facfe)
+      drop-shadow(0 0 12px #00f2fe)
+      drop-shadow(0 0 25px #4facfe)
+      contrast(110%);
+  }
+}
 
 
 /* Header */
@@ -81,7 +117,7 @@
   position: fixed;
   width: 94%;
   height: 50%;
-  z-index: 15;
+  z-index: 20;
   bottom: 3%;
   left: 10px;
 }
@@ -970,6 +1006,10 @@
   color: white !important;
 }
 
+.cyber-card-item {
+  transition: all 0.2s ease-in-out;
+}
+
 .cyber-card-item:hover {
   transform: translateY(-2px);
 
@@ -1082,10 +1122,12 @@
 .cyber-qty-box {
   max-width: 100px;
   height: 40px;
+  border: 1px solid #00f0ff;
   border-radius: 8px;
   padding: 0 8px;
-  padding: '4px 8px';
 }
+
+
 
 .home-motto {
   width: 80%;

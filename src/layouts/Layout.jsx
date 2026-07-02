@@ -19,6 +19,8 @@ function Layout() {
     const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
     const totalWish = wishList.length; // Numero di elementi nei preferiti
 
+    
+
     return (
         <div className="app-container">
             <header className='header'>
@@ -109,14 +111,9 @@ function Layout() {
 
 
 
-                                            <div className="d-flex align-items-center gap-2 flex-grow-1">
+                                            <div className="d-flex align-items-center  justify-content-between gap-2 flex-grow-0 cart-card">
                                                 <div
-                                                    className="d-flex align-items-center justify-content-between flex-grow-1 ms-auto cyber-qty-box "
-                                                    style={{
-                                                        border: '1px solid #00f0ff',
-                                                        borderRadius: '8px',
-                                                        padding: '4px 8px'
-                                                    }}
+                                                    className="d-flex align-items-center justify-content-between flex-grow-0 cyber-qty-box "
                                                 >
 
                                                     <span className="fw-bold p-font qty-display">

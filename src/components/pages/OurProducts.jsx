@@ -12,9 +12,11 @@ function OurProducts() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [viewMode, setViewMode] = useState('grid');
     const [windowSize, setWindowSize] = useState(window.innerWidth);
-
+    
 
     const searchQuery = searchParams.get("search") || "";
+    const [inputChange, setInputChange] = useState(searchQuery);
+
     const selectedCategoryName = searchParams.get("category") || "";
     const selectedOrder = searchParams.get("order") || "";
     const directionParam = searchParams.get("direction") || "DESC";
@@ -38,6 +40,22 @@ function OurProducts() {
         }
         setSearchParams(newParams);
     };
+
+    useEffect(() => {
+        setInputChange(searchQuery)
+    }, [searchQuery]);
+
+    useEffect(() => {
+        const searchDebounce = setTimeout(()=> {
+            if (inputChange !== (searchParams.get('search') || '')){
+                updateSearchParams('search', inputChange)
+            }
+        }, 1000);
+
+        return () => {
+            clearTimeout(searchDebounce);
+        }
+    },[inputChange])
 
     useEffect(() => {
         const handleResize = () => {
@@ -110,11 +128,13 @@ function OurProducts() {
             }
         }
 
+        
+
         if (categories.length > 0 || selectedCategoryName === '' || searchParams.get('filter') === 'discount') {
             fetchFilteredProducts();
         }
 
-    }, [searchParams, categories, searchQuery, selectedCategoryName, selectedOrder, direction]);
+    }, [searchParams, categories]);
 
     return (
         <div className="products-page">
@@ -133,8 +153,8 @@ function OurProducts() {
                             <input
                                 type="text"
                                 placeholder="Cerca prodotto..."
-                                value={searchQuery}
-                                onChange={(e) => updateSearchParams("search", e.target.value)}
+                                value={inputChange}
+                                onChange={function (event) {setInputChange(event.target.value)}}
                                 className="form-control cyber-input p-font"
                             />
                         </div>
