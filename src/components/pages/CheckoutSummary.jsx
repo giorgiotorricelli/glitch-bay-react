@@ -4,7 +4,7 @@ import { useCart } from '../../context/CartContext';
 import { formatphoneNumber } from '../../utils/functions';
 
 
-const blanckOBJ = {
+const blankOBJ = {
     payment_methods: 'stripe',
     firstName: '',
     lastName: '',
@@ -16,7 +16,7 @@ const blanckOBJ = {
 
 function CheckoutSummary() {
     const { cart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart } = useCart();
-    const [formData, setFormData] = useState(blanckOBJ);
+    const [formData, setFormData] = useState(blankOBJ);
     const [cardData, setCardData] = useState({
         cardNumber: '',
         cardExpiry: '',
@@ -51,6 +51,31 @@ function CheckoutSummary() {
         event.preventDefault();
         setPaymentError('');
 
+        // 1. Controllo se il carrello è vuoto
+        if (cart.length === 0) {
+            setPaymentError("Impossibile procedere: Il carrello è vuoto. Aggiungi almeno un prodotto per completare l'ordine.");
+            return;
+        }
+
+        // 2. Controllo validità data di scadenza (non precedente alla data corrente)
+        if (cardData.cardExpiry) {
+            const [expiryMonth, expiryYear] = cardData.cardExpiry.split('/').map(Number);
+
+            if (expiryMonth && expiryYear) {
+                const currentDate = new Date();
+                // getFullYear() % 100 prende le ultime due cifre dell'anno (es. 2026 -> 26)
+                const currentYear = currentDate.getFullYear() % 100;
+                // getMonth() è basato su zero (0 = Gennaio, 11 = Dicembre), quindi aggiungiamo 1
+                const currentMonth = currentDate.getMonth() + 1;
+
+                if (expiryYear < currentYear || (expiryYear === currentYear && expiryMonth < currentMonth)) {
+                    setPaymentError("Transazione fallita: La carta inserita è scaduta. Controlla i dati o usa un'altra carta.");
+                    return;
+                }
+            }
+        }
+
+        // 3. Controllo whitelist carte rifiutate del simulatore
         const declinedExpiries = ['06/31', '05/28', '10/29'];
         if (declinedExpiries.includes(cardData.cardExpiry)) {
             setPaymentError("Transazione fallita: Fondi insufficienti sulla carta selezionata. Cambia metodo di pagamento e riprova.");
@@ -85,7 +110,7 @@ function CheckoutSummary() {
                 const lastFourDigits = cleanCardNumber.slice(-4) || '****';
 
                 clearCart();
-                setFormData(blanckOBJ);
+                setFormData(blankOBJ);
 
 
                 navigate('/order_success', {
@@ -175,11 +200,11 @@ function CheckoutSummary() {
                             <h3 className="cyber-title m-0">Totale: {totalPrice.toFixed(2).replace('.', ',')}&euro;</h3>
                         </div>
                         <div className='mt-3 text-center'>
-                        <span className="text-info small opacity-75 tracking-wider text-uppercase fw-bold block mb-2 d-block">
-                            *spedizione gratuita per gli ordini sopra 250&euro;
-                        </span>
+                            <span className="text-info small opacity-75 tracking-wider text-uppercase fw-bold block mb-2 d-block">
+                                *spedizione gratuita per gli ordini sopra 250&euro;
+                            </span>
                         </div>
-                            
+
                     </div>
 
                     <div className="col-12 col-lg-6">
